@@ -1,0 +1,15 @@
+<%- include('partials/header') -%>
+
+<section>
+  <p>User Name: <%= user.userName %></p>
+  <p>Email: <%= user.email %></p>
+  <p>Joined in <%= user.created %></p>
+  <div>
+    <span><%= books.length %> books | </span>
+    <span><%= books.filter(book => book.status === 'reading').length %> currently reading | </span>
+    <span><%= books.filter(book => book.status === 'finished').length %> finished</span>
+  </div>
+  <a href="/logout">Logout</a>
+</section>
+
+<%- include('partials/footer') -%>

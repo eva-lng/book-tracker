@@ -1,0 +1,84 @@
+<%- include('partials/header') -%>
+  <section>
+    <form action="/search" method="GET">
+      <input type="text" name="query" placeholder="Search here">
+      <button type="submit">Search</button>
+    </form>
+  </section>
+  
+  <section>
+    <h2>My Books</h2>
+    <% books.forEach( book => {%>
+      <div class="book-info" data-id="<%=book._id%>">
+        <a href="/books/viewBook/<%=book._id%>">
+          <span><%= book.title %></span>
+        </a>
+        <span><%= book.author %></span>
+        <span>added: <%= book.createdAt %></span>
+        <img src="<%=book.imageUrl%>" alt="book cover thumbnail">
+        <form 
+          action="/books/updateBook/<%=book._id%>?_method=PUT"
+          method="POST"
+        >
+          <% if (book.status === 'reading') {%>
+            <button class="fa-solid fa-book-open" type="submit"></button>
+          <% } else if (book.status === 'finished') {%>
+            <button class="fa-solid fa-square-check" type="submit"></button>
+          <% } %>
+        </form>
+        <!-- <button class="edit-btn">Edit</button> -->
+        <form 
+          action="/books/deleteBook/<%=book._id%>?_method=DELETE"
+          method="POST"
+        >
+          <button type="submit">Delete</button>
+        </form>
+        <!-- <button class="delete-btn">Delete</button> -->
+      </div>
+    <% }) %>
+  </section>
+  <section>
+    <a href="/logout">Logout</a>
+  </section>
+
+  <!-- <section class="modal" id="modalAddBook">
+    <div class="modal-inner">
+      <h3>New entry</h3>
+      <form action="/books/addBook" method="POST">
+        <input type="text" name="bookTitle" placeholder="Title">
+        <input type="text" name="bookAuthor" placeholder="Author">
+        <div class="radio-btn">
+            <input type="radio" name="status" value="reading" id="reading" checked>
+            <label for="reading">Reading</label>
+        </div>
+        <div class="radio-btn">
+            <input type="radio" name="status" value="finished" id="finished">
+            <label for="finished">Finished</label>
+        </div>
+        <button type="submit" class="closeModal">Save</button>
+        <button type="button" class="closeModal">Cancel</button>
+      </form>
+    </div>
+  </section> -->
+
+  <!-- <section class="modal" id="modalEditBook">
+    <div class="modal-inner">
+      <h3>New entry</h3>
+      <form action="/books/updateBook" method="POST">
+        <input type="text" name="bookTitle" placeholder="Title">
+        <input type="text" name="bookAuthor" placeholder="Author">
+        <div class="radio-btn">
+          <input type="radio" name="status" value="reading" id="reading" checked>
+          <label for="reading">Reading</label>
+        </div>
+        <div class="radio-btn">
+          <input type="radio" name="status" value="finished" id="finished">
+          <label for="finished">Finished</label>
+        </div>
+        <button type="submit" class="closeModal">Save</button>
+        <button type="button" class="closeModal">Cancel</button>
+      </form>
+    </div>
+  </section> -->
+
+<%- include('partials/footer') -%>

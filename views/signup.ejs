@@ -1,0 +1,13 @@
+<%- include('partials/header') -%>
+
+  <h3>Create your own account</h3>
+  <form action="/signup" method="POST">
+    <input type="text" name="userName" placeholder="User Name">
+    <input type="email" name="email" placeholder="Email">
+    <input type="password" name="password" placeholder="Password">
+    <input type="password" name="confirmPassword" placeholder="Confirm Password">
+    <input type="submit">
+  </form>
+  <p>Have an account already? <a href="/login">Log in now</a></p>
+
+<%- include('partials/footer') -%>
