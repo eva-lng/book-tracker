@@ -34,12 +34,14 @@ module.exports = {
     }
   },
   search: async (req, res) => {
-    const input = req.query.query
+    const input = req.query.q
     try {
+      const savedBooks = await Book.find({ user: req.user.id }, 'apiID status');
       const response = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${input}&key=${api_key}&langRestrict=en`)
       const data = await response.json()
-      res.render('results.ejs', {books: data.items, user: req.user})
+      res.render('results.ejs', {books: data.items, user: req.user, savedBooks})
       console.log('Search term passed')
+      console.log(savedBooks)
     } catch(err) {
         console.log(err)
     }
@@ -55,8 +57,9 @@ module.exports = {
         pageCount: req.body.pageCount,
         publisher: req.body.publisher,
         imageUrl: req.body.imageUrl,
-        status: 'finished', 
-        user: req.user.id
+        status: 'read', 
+        user: req.user.id,
+        apiID: req.body.apiID
       })
       console.log('Book has been added!')
       res.redirect('/books')
@@ -67,7 +70,7 @@ module.exports = {
   updateBook: async (req, res) => {
     try {
       const book = await Book.findById(req.params.id)
-      const newStatus = book.status === 'reading' ? 'finished' : 'reading'
+      const newStatus = book.status === 'currently reading' ? 'read' : 'currently reading'
       await Book.findByIdAndUpdate(req.params.id, {
         status: newStatus
       })
@@ -87,19 +90,4 @@ module.exports = {
         console.log(err)
     }
   }
-  // updateBook: async (req, res) => {
-  //   try {
-  //     const bookId = req.params.id
-  //     await Book.findByIdAndUpdate(bookId, {
-  //       title: req.body.bookTitle,
-  //       author: req.body.bookAuthor,
-  //       status: req.body.status
-  //     })
-  //     console.log('Book has been updated')
-  //     res.redirect('/books')
-  //   } catch(err) {
-  //     console.log(err)
-  //     res.status(500).json({ error: 'Failed to update the book' })
-  //   }
-  // },
 }

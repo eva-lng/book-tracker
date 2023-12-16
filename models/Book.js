@@ -7,7 +7,7 @@ const BookSchema = new mongoose.Schema({
   },
   subtitle: {
     type: String,
-    required: true,
+    required: false,
   },
   authors: {
     type: String,
@@ -40,7 +40,11 @@ const BookSchema = new mongoose.Schema({
   status: {
     type: String,
     required: true,
-    enum: ['reading', 'finished']
+    enum: ['currently reading', 'read']
+  },
+  apiID: {
+    type: String,
+    required: true,
   },
   createdAt: {
     type: Date,

@@ -1,7 +1,7 @@
 <%- include('partials/header') -%>
 <section>
   <form action="/search" method="GET">
-    <input type="text" name="query" placeholder="Search here">
+    <input type="text" name="q" placeholder="Search here">
     <button type="submit">Search</button>
   </form>
 </section>
@@ -19,18 +19,22 @@
       <% if (book.volumeInfo.imageLinks) { %>
         <img src="<%=book.volumeInfo.imageLinks.thumbnail%>" alt="book cover thumbnail">
       <% } %>
-  
-      <form action="/books/addBook" method="POST">
-        <input type="hidden" name="title" value="<%= book.volumeInfo.title %>">
-        <input type="hidden" name="subtitle" value="<%= book.volumeInfo.subtitle ? book.volumeInfo.subtitle : '' %>">
-        <input type="hidden" name="authors" value="<%= book.volumeInfo.authors && book.volumeInfo.authors.length > 0 ? book.volumeInfo.authors.join(', ') : '' %>">
-        <input type="hidden" name="description" value="<%= book.volumeInfo.description ? book.volumeInfo.description : '' %>">
-        <input type="hidden" name="year" value="<%= book.volumeInfo.publishedDate ? book.volumeInfo.publishedDate.slice(0, 4) : '?' %>">
-        <input type="hidden" name="pageCount" value="<%= book.volumeInfo.pageCount ? book.volumeInfo.pageCount.toString() : '?' %>">
-        <input type="hidden" name="publisher" value="<%= book.volumeInfo.publisher %>">
-        <input type="hidden" name="imageUrl" value="<%= book.volumeInfo.imageLinks ? book.volumeInfo.imageLinks.thumbnail : '' %>">
-        <button type="submit">Add</button>
-      </form>
+      <% if (savedBooks.some(savedBook => savedBook.apiID === book.id)) { %>
+        <button><%= savedBooks.find(savedBook => savedBook.apiID === book.id).status %></button>
+      <% } else { %>
+        <form action="/books/addBook" method="POST">
+          <input type="hidden" name="apiID" value="<%= book.id %>">
+          <input type="hidden" name="title" value="<%= book.volumeInfo.title %>">
+          <input type="hidden" name="subtitle" value="<%= book.volumeInfo.subtitle ? book.volumeInfo.subtitle : '' %>">
+          <input type="hidden" name="authors" value="<%= book.volumeInfo.authors && book.volumeInfo.authors.length > 0 ? book.volumeInfo.authors.join(', ') : '' %>">
+          <input type="hidden" name="description" value="<%= book.volumeInfo.description ? book.volumeInfo.description : '' %>">
+          <input type="hidden" name="year" value="<%= book.volumeInfo.publishedDate ? book.volumeInfo.publishedDate.slice(0, 4) : '?' %>">
+          <input type="hidden" name="pageCount" value="<%= book.volumeInfo.pageCount ? book.volumeInfo.pageCount.toString() : '?' %>">
+          <input type="hidden" name="publisher" value="<%= book.volumeInfo.publisher ? book.volumeInfo.publisher : '' %>">
+          <input type="hidden" name="imageUrl" value="<%= book.volumeInfo.imageLinks ? book.volumeInfo.imageLinks.thumbnail : '' %>">
+          <button type="submit">Add</button>
+        </form>
+      <% } %>
     </div>
     <hr />
   <% }) %>
