@@ -1,5 +1,5 @@
-const Book = require('../models/Book');
-require('dotenv').config({path: './config/.env'})
+const Book = require("../models/Book");
+require("dotenv").config({path: "./config/.env"})
 const api_key = process.env.API_KEY;
 
 module.exports = {
@@ -16,10 +16,10 @@ module.exports = {
     try {
       const books = await Book.find({user:req.user.id}).sort({ createdAt: "desc" });
       const formattedBooks = books.map(book => {
-        const formattedDate = book.createdAt.toLocaleDateString('en-US')
+        const formattedDate = book.createdAt.toLocaleDateString("en-US")
         return {...book._doc, createdAt: formattedDate}
       })
-      res.render('books.ejs', {books: formattedBooks, user: req.user})
+      res.render("books.ejs", {books: formattedBooks, user: req.user})
     } catch(err) {
         console.log(err)
     }
@@ -30,17 +30,17 @@ module.exports = {
       res.render("viewBook.ejs", { book: book, user: req.user });
     } catch (err) {
       console.log(err)
-      res.status(500).json({ error: 'Failed to retrieve book details' })
+      res.status(500).json({ error: "Failed to retrieve book details" })
     }
   },
   search: async (req, res) => {
     const input = req.query.q
     try {
-      const savedBooks = await Book.find({ user: req.user.id }, 'apiID status');
+      const savedBooks = await Book.find({ user: req.user.id }, "apiID status");
       const response = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${input}&key=${api_key}&langRestrict=en`)
       const data = await response.json()
-      res.render('results.ejs', {books: data.items, user: req.user, savedBooks})
-      console.log('Search term passed')
+      res.render("results.ejs", {books: data.items, user: req.user, savedBooks})
+      console.log("Search term passed")
       console.log(savedBooks)
     } catch(err) {
         console.log(err)
@@ -57,12 +57,12 @@ module.exports = {
         pageCount: req.body.pageCount,
         publisher: req.body.publisher,
         imageUrl: req.body.imageUrl,
-        status: 'read', 
+        status: "read", 
         user: req.user.id,
         apiID: req.body.apiID
       })
-      console.log('Book has been added!')
-      res.redirect('/books')
+      console.log("Book has been added!")
+      res.redirect("/books")
     } catch(err) {
       console.log(err)
     }
@@ -70,21 +70,21 @@ module.exports = {
   updateBook: async (req, res) => {
     try {
       const book = await Book.findById(req.params.id)
-      const newStatus = book.status === 'currently reading' ? 'read' : 'currently reading'
+      const newStatus = book.status === "currently reading' ? 'read' : 'currently reading"
       await Book.findByIdAndUpdate(req.params.id, {
         status: newStatus
       })
-      console.log('Book has been updated')
-      res.redirect('/books')
+      console.log("Book has been updated")
+      res.redirect("/books")
     } catch(err) {
       console.log(err)
-      res.status(500).json({ error: 'Failed to update the book' })
+      res.status(500).json({ error: "Failed to update the book" })
     }
   },
   deleteBook: async (req, res) => {
     try {
       await Book.deleteOne({ _id: req.params.id })
-      console.log('Deleted Book')
+      console.log("Deleted Book")
       res.redirect("/books")
     } catch(err) {
         console.log(err)

@@ -1,37 +1,37 @@
-const express = require('express')
+const express = require("express")
 const app = express()
-const mongoose = require('mongoose')
-const passport = require('passport') // helps handle authentication
-const session = require('express-session') // handles cookies and storing sessions (have logged in users)
-const MongoStore = require('connect-mongo') // handles cookies and storing sessions (have logged in users)
+const mongoose = require("mongoose")
+const passport = require("passport") // helps handle authentication
+const session = require("express-session") // handles cookies and storing sessions (have logged in users)
+const MongoStore = require("connect-mongo") // handles cookies and storing sessions (have logged in users)
 const methodOverride = require("method-override");
-const flash = require('express-flash') // flash notificaion of invalid password
-const logger = require('morgan') // logs requests coming through
-const connectDB = require('./config/database')
-const mainRoutes = require('./routes/main')
-const bookRoutes = require('./routes/books')
+const flash = require("express-flash") // flash notificaion of invalid password
+const logger = require("morgan") // logs requests coming through
+const connectDB = require("./config/database")
+const mainRoutes = require("./routes/main")
+const bookRoutes = require("./routes/books")
 
 // Set up env
-require('dotenv').config({path: './config/.env'})
+require("dotenv").config({path: "./config/.env"})
 
 // Passport config
-require('./config/passport')(passport)
+require("./config/passport")(passport)
 
 // DB connection
 connectDB()
 
 // Setting up template engine
-app.set('view engine', 'ejs') // setting up EJS for Views
-app.use(express.static('public')) // public folder
+app.set("view engine", "ejs") // setting up EJS for Views
+app.use(express.static("public")) // public folder
 app.use(express.urlencoded({ extended: true })) // functions as body parser
 app.use(express.json()) // functions as body parser
-app.use(logger('dev')) // to log http requests
+app.use(logger("dev")) // to log http requests
 app.use(methodOverride("_method"));
 
 // Sessions
 app.use(
   session({
-    secret: 'keyboard cat',
+    secret: "keyboard cat",
     resave: false,
     saveUninitialized: false,
     store: MongoStore.create({ mongoUrl: process.env.DB_STRING }),
@@ -45,9 +45,9 @@ app.use(passport.session())
 // Set up flash
 app.use(flash())
 
-app.use('/', mainRoutes)
-app.use('/books', bookRoutes)
+app.use("/", mainRoutes)
+app.use("/books", bookRoutes)
 
 app.listen(process.env.PORT, ()=>{
-    console.log('Server is running, you better catch it!')
+    console.log("Server is running, you better catch it!")
 })

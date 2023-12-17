@@ -1,4 +1,4 @@
-const mongoose = require('mongoose')
+const mongoose = require("mongoose")
 
 const BookSchema = new mongoose.Schema({
   title: {
@@ -40,7 +40,7 @@ const BookSchema = new mongoose.Schema({
   status: {
     type: String,
     required: true,
-    enum: ['currently reading', 'read']
+    enum: ["currently reading", "read"]
   },
   apiID: {
     type: String,
@@ -52,4 +52,4 @@ const BookSchema = new mongoose.Schema({
   }
 })
 
-module.exports = mongoose.model('Book', BookSchema)
+module.exports = mongoose.model("Book", BookSchema)
