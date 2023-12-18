@@ -8,9 +8,13 @@
   
   <section>
     <form action="/quotes/saveQuote" method="POST">
-      <textarea name="" id="" cols="30" rows="10"></textarea>
-      <input type="text">
-      <button>Add</button>
+      <label for="quoteText">Quote:</label>
+      <textarea name="quoteText" id="quoteText" cols="30" rows="6"></textarea>
+
+      <label for="bookName">Book Name</label>
+      <input type="text" name="bookName" id="bookName">
+      
+      <button type="submit">Save Quote</button>
     </form>
   </section>
 

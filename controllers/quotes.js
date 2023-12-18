@@ -19,8 +19,8 @@ module.exports = {
   saveQuote: async (req, res) => {
     try {
       await Quote.create({
-        text: req.body,
-        bookTitle: req.body,
+        text: req.body.quoteText,
+        bookTitle: req.body.bookName,
         user: req.user.id
       })
       console.log("Quote has been added!")
