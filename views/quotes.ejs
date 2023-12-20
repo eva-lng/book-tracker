@@ -1,0 +1,17 @@
+<%- include("partials/header") -%>
+  <section>
+    <form action="/search" method="GET">
+      <input type="text" name="q" placeholder="Search here">
+      <button type="submit">Search</button>
+    </form>
+  </section>
+  
+  <section>
+    <p><a href="/quotes/addQuote">Add a quote</a></p>
+  </section>
+
+  <section>
+    <a href="/logout">Logout</a>
+  </section>
+
+<%- include("partials/footer") -%>

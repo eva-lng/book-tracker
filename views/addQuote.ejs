@@ -1,0 +1,21 @@
+<%- include("partials/header") -%>
+  <section>
+    <form action="/search" method="GET">
+      <input type="text" name="q" placeholder="Search here">
+      <button type="submit">Search</button>
+    </form>
+  </section>
+  
+  <section>
+    <form action="/quotes/saveQuote" method="POST">
+      <textarea name="" id="" cols="30" rows="10"></textarea>
+      <input type="text">
+      <button>Add</button>
+    </form>
+  </section>
+
+  <section>
+    <a href="/logout">Logout</a>
+  </section>
+
+<%- include("partials/footer") -%>
