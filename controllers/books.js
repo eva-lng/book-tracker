@@ -21,7 +21,7 @@ module.exports = {
       })
       res.render("books.ejs", {books: formattedBooks, user: req.user})
     } catch(err) {
-        console.log(err)
+      console.log(err)
     }
   },
   viewBook: async (req, res) => {
@@ -43,7 +43,7 @@ module.exports = {
       console.log("Search term passed")
       console.log(savedBooks)
     } catch(err) {
-        console.log(err)
+      console.log(err)
     }
   },
   addBook: async (req, res) => {
@@ -70,10 +70,11 @@ module.exports = {
   updateBook: async (req, res) => {
     try {
       const book = await Book.findById(req.params.id)
-      const newStatus = book.status === "currently reading' ? 'read' : 'currently reading"
+      const newStatus = book.status === "reading" ? "read" : "reading"
       await Book.findByIdAndUpdate(req.params.id, {
         status: newStatus
       })
+      console.log(book)
       console.log("Book has been updated")
       res.redirect("/books")
     } catch(err) {
@@ -87,7 +88,7 @@ module.exports = {
       console.log("Deleted Book")
       res.redirect("/books")
     } catch(err) {
-        console.log(err)
+      console.log(err)
     }
   }
 }

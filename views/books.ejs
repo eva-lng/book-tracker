@@ -20,7 +20,7 @@
           action="/books/updateBook/<%=book._id%>?_method=PUT"
           method="POST"
         >
-          <% if (book.status === 'currently reading') {%>
+          <% if (book.status === 'reading') {%>
             <button class="fa-solid fa-book-open" type="submit"></button>
           <% } else if (book.status === 'read') {%>
             <button class="fa-solid fa-square-check" type="submit"></button>
