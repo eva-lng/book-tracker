@@ -3,8 +3,9 @@ const Quote = require("../models/Quote");
 module.exports = {
   getQuotes: async (req, res) => {
     try {
-      const quotes = await Quote.find({user:req.user.id}).sort({ createdAt: "desc" })
-      res.render("quotes.ejs", {quotes: quotes, user: req.user})
+      const quotes = await Quote.find({user:req.user.id})
+      const groupedQuotes = groupQuotesByBookTitle(quotes)
+      res.render("quotes.ejs", {quotes: groupedQuotes, user: req.user})
     } catch(err) {
       console.log(err)
     }
@@ -52,4 +53,16 @@ module.exports = {
   //       console.log(err)
   //   }
   // }
+}
+
+function groupQuotesByBookTitle(quotes) {
+  const groupedQuotes = {}
+  quotes.forEach(quote => {
+    const { bookTitle, text } = quote
+    if (!groupedQuotes[bookTitle]) {
+      groupedQuotes[bookTitle] = []
+    }
+    groupedQuotes[bookTitle].push(text)
+  })
+  return groupedQuotes
 }

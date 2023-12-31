@@ -11,6 +11,19 @@
   </section>
 
   <section>
+    <% for (const book in quotes) { %>
+      <div>
+        <h2><%= book %></h2>
+        <% quotes[book].forEach(quote => { %>
+          <div>
+            <p><%= quote %></p>
+          </div>
+        <% }) %>
+      </div>
+    <% } %>
+  </section>
+
+  <section>
     <a href="/logout">Logout</a>
   </section>
 

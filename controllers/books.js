@@ -41,7 +41,6 @@ module.exports = {
       const data = await response.json()
       res.render("results.ejs", {books: data.items, user: req.user, savedBooks})
       console.log("Search term passed")
-      console.log(savedBooks)
     } catch(err) {
       console.log(err)
     }
