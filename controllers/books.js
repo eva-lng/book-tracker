@@ -73,7 +73,6 @@ module.exports = {
       await Book.findByIdAndUpdate(req.params.id, {
         status: newStatus
       })
-      console.log(book)
       console.log("Book has been updated")
       res.redirect("/books")
     } catch(err) {
@@ -84,7 +83,7 @@ module.exports = {
   deleteBook: async (req, res) => {
     try {
       await Book.deleteOne({ _id: req.params.id })
-      console.log("Deleted Book")
+      console.log("Deleted book")
       res.redirect("/books")
     } catch(err) {
       console.log(err)

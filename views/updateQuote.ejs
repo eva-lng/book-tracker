@@ -1,0 +1,28 @@
+<%- include("partials/header") -%>
+  <section>
+    <form action="/search" method="GET">
+      <input type="text" name="q" placeholder="Search here">
+      <button type="submit">Search</button>
+    </form>
+  </section>
+  
+  <section>
+    <form 
+      action="/quotes/updateQuote/<%=quote._id%>?_method=PUT" 
+      method="POST"
+    >
+      <label for="quoteText">Quote:</label>
+      <textarea name="quoteText" id="quoteText" cols="30" rows="6"><%= quote.text %></textarea>
+
+      <label for="bookName">Book Name</label>
+      <input type="text" name="bookName" id="bookName" value="<%=quote.bookTitle%>">
+      
+      <button type="submit">Update Quote</button>
+    </form>
+  </section>
+
+  <section>
+    <a href="/logout">Logout</a>
+  </section>
+
+<%- include("partials/footer") -%>
