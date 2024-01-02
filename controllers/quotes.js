@@ -30,6 +30,15 @@ module.exports = {
       console.log(err)
     }
   },
+  deleteQuote: async (req, res) => {
+    try {
+      await Quote.deleteOne({ _id: req.params.id })
+      console.log("Deleted Quote")
+      res.redirect("/quotes")
+    } catch(err) {
+        console.log(err)
+    }
+  }
   // updateBook: async (req, res) => {
   //   try {
   //     const book = await Book.findById(req.params.id)
@@ -44,25 +53,16 @@ module.exports = {
   //     res.status(500).json({ error: "Failed to update the book" })
   //   }
   // },
-  // deleteBook: async (req, res) => {
-  //   try {
-  //     await Book.deleteOne({ _id: req.params.id })
-  //     console.log("Deleted Book")
-  //     res.redirect("/books")
-  //   } catch(err) {
-  //       console.log(err)
-  //   }
-  // }
 }
 
 function groupQuotesByBookTitle(quotes) {
   const groupedQuotes = {}
   quotes.forEach(quote => {
-    const { bookTitle, text } = quote
+    const { bookTitle, text, _id } = quote
     if (!groupedQuotes[bookTitle]) {
       groupedQuotes[bookTitle] = []
     }
-    groupedQuotes[bookTitle].push(text)
+    groupedQuotes[bookTitle].push({text, _id})
   })
   return groupedQuotes
 }

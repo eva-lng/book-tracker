@@ -6,5 +6,6 @@ const { ensureAuth } = require("../middleware/auth")
 router.get("/", ensureAuth, quotesController.getQuotes)
 router.get("/addQuote", quotesController.addQuote)
 router.post("/saveQuote", quotesController.saveQuote)
+router.delete("/deleteQuote/:id", quotesController.deleteQuote)
 
 module.exports = router

@@ -16,7 +16,19 @@
         <h2><%= book %></h2>
         <% quotes[book].forEach(quote => { %>
           <div>
-            <p><%= quote %></p>
+            <p><%= quote.text %></p>
+            <!-- <form 
+              action="/quotes/updateQuote/<%=quote._id%>?_method=PUT"
+              method="POST"
+            >
+              <button type="submit">Edit</button>
+            </form> -->
+            <form 
+              action="/quotes/deleteQuote/<%=quote._id%>?_method=DELETE"
+              method="POST"
+            >
+              <button type="submit">Delete</button>
+            </form>
           </div>
         <% }) %>
       </div>

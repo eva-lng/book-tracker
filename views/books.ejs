@@ -26,14 +26,12 @@
             <button class="fa-solid fa-square-check" type="submit"></button>
           <% } %>
         </form>
-        <!-- <button class="edit-btn">Edit</button> -->
         <form 
           action="/books/deleteBook/<%=book._id%>?_method=DELETE"
           method="POST"
         >
           <button type="submit">Delete</button>
         </form>
-        <!-- <button class="delete-btn">Delete</button> -->
       </div>
     <% }) %>
   </section>

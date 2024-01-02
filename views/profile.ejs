@@ -5,7 +5,7 @@
   <p>Email: <%= user.email %></p>
   <p>Joined in <%= user.created %></p>
   <div>
-    <span><%= books.length %> books | </span>
+    <span><%= books.length %> <%= books.length === 1 ? "book:" : "books:" %></span>
     <span><%= books.filter(book => book.status === "reading").length %> currently reading | </span>
     <span><%= books.filter(book => book.status === "read").length %> read</span>
   </div>
