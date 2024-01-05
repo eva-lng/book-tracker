@@ -14,9 +14,32 @@ module.exports = {
     }
   },
   getBooks: async (req, res) => {
-    console.log(req.user)
     try {
-      const books = await Book.find({user:req.user.id}).sort({ createdAt: "desc" });
+      const books = await Book.find({user: req.user.id}).sort({ createdAt: "desc" });
+      const formattedBooks = books.map(book => {
+        const formattedDate = book.createdAt.toLocaleDateString("en-US")
+        return {...book._doc, createdAt: formattedDate}
+      })
+      res.render("books.ejs", {books: formattedBooks, user: req.user})
+    } catch(err) {
+      console.log(err)
+    }
+  },
+  getBooksRead: async (req, res) => {
+    try {
+      const books = await Book.find({user: req.user.id, status: "read"}).sort({ createdAt: "desc" });
+      const formattedBooks = books.map(book => {
+        const formattedDate = book.createdAt.toLocaleDateString("en-US")
+        return {...book._doc, createdAt: formattedDate}
+      })
+      res.render("books.ejs", {books: formattedBooks, user: req.user})
+    } catch(err) {
+      console.log(err)
+    }
+  },
+  getBooksReading: async (req, res) => {
+    try {
+      const books = await Book.find({user: req.user.id, status: "reading"}).sort({ createdAt: "desc" });
       const formattedBooks = books.map(book => {
         const formattedDate = book.createdAt.toLocaleDateString("en-US")
         return {...book._doc, createdAt: formattedDate}

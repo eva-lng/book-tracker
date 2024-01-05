@@ -8,6 +8,14 @@
   
   <section>
     <h2>My Books</h2>
+
+    <div>
+      <ul>
+        <li><a href="/books/">All</a></li>
+        <li><a href="/books/read">Read</a></li>
+        <li><a href="/books/reading">Currently reading</a></li>
+      </ul>
+    </div>
     <% books.forEach( book => {%>
       <div class="book-info" data-id="<%=book._id%>">
         <a href="/books/viewBook/<%=book._id%>">
