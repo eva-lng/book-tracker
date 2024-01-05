@@ -1,0 +1,50 @@
+<%- include("partials/header") -%>
+<section>
+  <form action="/search" method="GET">
+    <input type="text" name="q" placeholder="Search here">
+    <button type="submit">Search</button>
+  </form>
+</section>
+
+<section>
+  <% if (book.volumeInfo.imageLinks) { %>
+    <img src="<%=book.volumeInfo.imageLinks.thumbnail%>" alt="book cover thumbnail">
+  <% } %>
+  <% if (savedBooks.some(savedBook => savedBook.apiID === book.id)) { %>
+    <button><%= savedBooks.find(savedBook => savedBook.apiID === book.id).status %></button>
+  <% } else { %>
+    <form action="/books/addBook" method="POST">
+      <input type="hidden" name="apiID" value="<%= book.id %>">
+      <input type="hidden" name="title" value="<%= book.volumeInfo.title %>">
+      <input type="hidden" name="subtitle" value="<%= book.volumeInfo.subtitle ? book.volumeInfo.subtitle : '' %>">
+      <input type="hidden" name="authors" value="<%= book.volumeInfo.authors && book.volumeInfo.authors.length > 0 ? book.volumeInfo.authors.join(', ') : '' %>">
+      <input type="hidden" name="description" value="<%= book.volumeInfo.description ? book.volumeInfo.description.split('<b>').join('').split('</b>').join('').split('<p>').join('').split('</p>').join('').split('<br>').join('').split('<i>').join('').split('</i>').join('') : '' %>">
+      <input type="hidden" name="year" value="<%= book.volumeInfo.publishedDate ? book.volumeInfo.publishedDate.slice(0, 4) : '' %>">
+      <input type="hidden" name="pageCount" value="<%= book.volumeInfo.pageCount ? book.volumeInfo.pageCount.toString() : '' %>">
+      <input type="hidden" name="publisher" value="<%= book.volumeInfo.publisher ? book.volumeInfo.publisher : '' %>">
+      <input type="hidden" name="imageUrl" value="<%= book.volumeInfo.imageLinks ? book.volumeInfo.imageLinks.thumbnail : '' %>">
+      <button type="submit">Add</button>
+    </form>
+  <% } %>
+  <h3><%= book.volumeInfo.title %></h3>
+  <% if (book.volumeInfo.subtitle) { %>
+    <h4><%= book.volumeInfo.subtitle %></h4>
+  <% } %>
+  <% if (book.volumeInfo.authors) { %>
+    <h4><%= book.volumeInfo.authors.join(", ") %></h4>
+  <% } %>
+  <% if (book.volumeInfo.publishedDate) { %>
+    <span><%= book.volumeInfo.publishedDate.slice(0, 4) %></span>
+  <% } %>
+  <% if (book.volumeInfo.publisher) { %>
+    <span><%= book.volumeInfo.publisher %></span>
+  <% } %>
+  <% if (book.volumeInfo.pageCount) { %>
+    <span><%= book.volumeInfo.pageCount + " pages" %></span>
+  <% } %>
+  <% if (book.volumeInfo.description) { %>
+    <p><%= book.volumeInfo.description.split("<b>").join("").split("</b>").join("").split("<p>").join("").split("</p>").join("").split("<br>").join("").split("<i>").join("").split("</i>").join("") %></p>
+  <% } %>
+</section>
+
+<%- include("partials/footer") -%>

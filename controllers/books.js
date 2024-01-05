@@ -2,6 +2,8 @@ const Book = require("../models/Book");
 require("dotenv").config({path: "./config/.env"})
 const api_key = process.env.API_KEY;
 
+// &langRestrict=en
+
 module.exports = {
   getProfile: async (req, res) => {
     try {
@@ -36,11 +38,22 @@ module.exports = {
   search: async (req, res) => {
     const input = req.query.q
     try {
-      const savedBooks = await Book.find({ user: req.user.id }, "apiID status");
-      const response = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${input}&key=${api_key}&langRestrict=en`)
+      const savedBooks = await Book.find({ user: req.user.id }, "apiID status")
+      const response = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${input}&key=${api_key}`)
       const data = await response.json()
       res.render("results.ejs", {books: data.items, user: req.user, savedBooks})
       console.log("Search term passed")
+    } catch(err) {
+      console.log(err)
+    }
+  },
+  getBookInfo: async (req, res) => {
+    const volumeID = req.params.id;
+    try {
+      const savedBooks = await Book.find({ user: req.user.id }, "apiID status")
+      const response = await fetch(`https://www.googleapis.com/books/v1/volumes/${volumeID}?key=${api_key}`)
+      const data = await response.json()
+      res.render("getBookInfo.ejs", {book: data, user: req.user, savedBooks})
     } catch(err) {
       console.log(err)
     }

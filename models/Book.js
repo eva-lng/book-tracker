@@ -7,7 +7,6 @@ const BookSchema = new mongoose.Schema({
   },
   subtitle: {
     type: String,
-    required: false,
   },
   authors: {
     type: String,
@@ -15,23 +14,18 @@ const BookSchema = new mongoose.Schema({
   },
   description: {
     type: String,
-    required: true,
   },
   year: {
     type: String,
-    required: true,
   },
   pageCount: {
     type: String,
-    required: true,
   },
   publisher: {
     type: String,
-    required: true,
   },
   imageUrl: {
     type: String,
-    required: true,
   },
   user: {
     type: mongoose.Schema.Types.ObjectId,
