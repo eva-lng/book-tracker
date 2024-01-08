@@ -23,11 +23,11 @@
   <script src="https://kit.fontawesome.com/5d7bb29ba5.js" crossorigin="anonymous"></script>
   </head>
   <body>
-    <header>
+    <header class="mb-xl-5 mb-lg-3">
       <nav class="navbar navbar-expand-sm">
         <div class="container">
           <a href="#" class="navbar-brand">Logo</a>
-          <form class="d-none d-lg-flex mx-auto" role="search" action="/search" method="GET">
+          <form class="d-none d-md-flex mx-auto no-collapse-form" role="search" action="/search" method="GET">
             <input class="form-control" type="search" name="q" placeholder="Search books..." aria-label="Search">
             <button class="btn btn-outline-success" type="submit">Search</button>
           </form>
@@ -41,7 +41,19 @@
               <li class="nav-item"><a href="/quotes" class="nav-link">Quotes</a></li>
               <li class="nav-item"><a href="/logout" class="nav-link">Sign Out</a></li>
             </ul>
+            <form class="d-sm-none d-flex" role="search" action="/search" method="GET">
+              <input class="form-control" type="search" name="q" placeholder="Search books..." aria-label="Search">
+              <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
           </div>
         </div>
       </nav>
+      <section class="d-none d-sm-block d-md-none">
+        <div class="container">
+          <form class="d-flex" role="search" action="/search" method="GET">
+            <input class="form-control" type="search" name="q" placeholder="Search books..." aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+          </form>
+        </div>
+      </section>
     </header>
