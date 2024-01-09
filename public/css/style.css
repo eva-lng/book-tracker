@@ -10,10 +10,10 @@
   width: 40%;
 }
 
-.profile h1, .profile .user-shelves h2 {
+.profile h1, .user-shelves h2 {
   max-width: 700px;
 }
 
-.user-info span {
-  width: 150px;
+.user-info span, .user-shelves span {
+  width:150px;
 }

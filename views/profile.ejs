@@ -4,8 +4,8 @@
   <div class="container">
     <div class="d-flex justify-content-center">
       <div>
-        <h1 class="h3 mb-3 mb-lg-4 border-black border-bottom w-100"><%= user.userName %></h1>
         <section class="user-info mb-5">
+          <h1 class="h3 mb-3 mb-lg-4 border-black border-bottom w-100"><%= user.userName %></h1>
           <div><span class="h5 d-inline-block me-3">Username</span> <%= user.userName %></div>
           <div><span class="h5 d-inline-block me-3">Email</span> <%= user.email %></div>
           <div><span class="h5 d-inline-block me-3">Joined</span> <%= user.created %></div>
@@ -13,14 +13,16 @@
 
         <section class="user-shelves">
           <h2 class="h4 mb-3 mb-lg-4 border-black border-bottom w-100">My bookshelves</h2>
-
+          <div>
+            <span class="h5 d-block d-sm-inline-block me-3">
+              <%= books.length %> <%= books.length === 1 ? "book" : "books" %>
+            </span>
+            <a href="/books/reading" class="d-inline-block me-1 me-md-2">Reading (<%= books.filter(book => book.status === "reading").length %>)</a>
+            <a href="/books/read" class="d-inline-block me-1 me-md-2">Read (<%= books.filter(book => book.status === "read").length %>)</a>
+            <a href="#" class="d-inline-block me-1 me-md-2">To read (0)</a>
+            <a href="/books" class="d-inline-block me-1 me-md-2">All (<%= books.length %>)</a>
+          </div>
         </section>
-      
-        <div>
-          <span><%= books.length %> <%= books.length === 1 ? "book:" : "books:" %></span>
-          <span><%= books.filter(book => book.status === "reading").length %> currently reading | </span>
-          <span><%= books.filter(book => book.status === "read").length %> read</span>
-        </div>
 
         <a href="/logout">Logout</a>
       </div>
