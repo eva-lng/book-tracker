@@ -34,7 +34,7 @@ const BookSchema = new mongoose.Schema({
   status: {
     type: String,
     required: true,
-    enum: ["reading", "read"]
+    enum: ["reading", "read", "wishlist"]
   },
   apiID: {
     type: String,

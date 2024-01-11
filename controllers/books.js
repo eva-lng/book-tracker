@@ -49,6 +49,18 @@ module.exports = {
       console.log(err)
     }
   },
+  getBooksWishlist: async (req, res) => {
+    try {
+      const books = await Book.find({user: req.user.id, status: "wishlist"}).sort({ createdAt: "desc" });
+      const formattedBooks = books.map(book => {
+        const formattedDate = book.createdAt.toLocaleDateString("en-US")
+        return {...book._doc, createdAt: formattedDate}
+      })
+      res.render("books.ejs", {books: formattedBooks, user: req.user})
+    } catch(err) {
+      console.log(err)
+    }
+  },
   viewBook: async (req, res) => {
     try {
       const book = await Book.findById(req.params.id)
