@@ -116,8 +116,7 @@ module.exports = {
   },
   updateBook: async (req, res) => {
     try {
-      const book = await Book.findById(req.params.id)
-      const newStatus = book.status === "reading" ? "read" : "reading"
+      const newStatus = req.body.newStatus
       await Book.findByIdAndUpdate(req.params.id, {
         status: newStatus
       })

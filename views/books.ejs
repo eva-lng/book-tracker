@@ -1,94 +1,84 @@
 <%- include("partials/header") -%>
 
 
-  <section>
-    <div class="container">
-      <div class="d-flex justify-content-center">
-        <div>
-          <h1 class="text-center">My Books</h1>
+  <section class="my-books">
+    <div class="container border border-success-subtle">
+      <h1 class="text-center">My Books</h1>
+      <section class="bookshelves-list">
+        <ul class="d-flex justify-content-center list-unstyled">
+          <li><a href="/books/" class="me-1 me-sm-2 me-md-3 me-lg-4">All</a></li>
+          <li><a href="/books/read" class="me-1 me-sm-2 me-md-3 me-lg-4">Read</a></li>
+          <li><a href="/books/reading" class="me-1 me-sm-2 me-md-3 me-lg-4">Currently reading</a></li>
+          <li><a href="/books/wishlist">Want to read</a></li>
+        </ul>
+      </section>
 
-          <section>
-            <ul>
-              <li><a href="/books/">All</a></li>
-              <li><a href="/books/read">Read</a></li>
-              <li><a href="/books/reading">Currently reading</a></li>
-            </ul>
-          </section>
-
-          <% books.forEach( book => {%>
-            <section class="book-info" data-id="<%=book._id%>">
-              <a href="/books/viewBook/<%=book._id%>">
-                <span><%= book.title %></span>
-              </a>
-              <span>by <%= book.authors %></span>
-              <span>added: <%= book.createdAt %></span>
+      <section class="bookcards-field d-flex flex-wrap justify-content-evenly">
+        <% books.forEach( book => {%>
+          <section class="book-card border border-warning-subtle d-flex" data-id="<%=book._id%>">
+            <div class="book-thumb">
               <img src="<%=book.imageUrl%>" alt="book cover thumbnail">
-
-              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editBookModal<%=book._id%>">
-                <%= book.status %>
+            </div>
+            <div class="book-info">
+              <h3>
+                <a href="/books/viewBook/<%=book._id%>" class="text-break"><%= book.title %></a>
+              </h3>
+              <p>by <%= book.authors %></p>
+              <p>added: <%= book.createdAt %></p>
+            </div>
+            <div class="book-actions">
+              <button type="button" class="btn btn-outline" data-bs-toggle="modal" data-bs-target="#editBookModal<%=book._id%>">
+                <i class="fa-solid <%= book.status === 'reading' ? 'fa-book-open' : book.status === 'read' ? 'fa-square-check' : 'fa-heart' %>"></i>
               </button>
-
-              <div class="modal fade" id="editBookModal<%=book._id%>" tabindex="-1">
-                <div class="modal-dialog modal-dialog-centered">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h1 class="modal-title fs-5">Change bookshelf for this book</h1>
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                      <form 
-                        action="/books/updateBook/<%=book._id%>?_method=PUT"
-                        method="POST"
-                      >
-                        <input type="hidden" name="newStatus" value="read">
-                        <button type="submit">Read</button>
-                      </form>
-                      <form 
-                        action="/books/updateBook/<%=book._id%>?_method=PUT"
-                        method="POST"
-                      >
-                        <input type="hidden" name="newStatus" value="reading">
-                        <button type="submit">Currently reading</button>
-                      </form>
-                      <form 
-                        action="/books/updateBook/<%=book._id%>?_method=PUT"
-                        method="POST"
-                      >
-                        <input type="hidden" name="newStatus" value="wishlist">
-                        <button type="submit">Want to read</button>
-                      </form>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-
-              <form 
-                action="/books/updateBook/<%=book._id%>?_method=PUT"
-                method="POST"
-              >
-                <% if (book.status === 'reading') {%>
-                  <button class="fa-solid fa-book-open" type="submit"></button>
-                <% } else if (book.status === 'read') {%>
-                  <button class="fa-solid fa-square-check" type="submit"></button>
-                <% } %>
-              </form>
               <form 
                 action="/books/deleteBook/<%=book._id%>?_method=DELETE"
                 method="POST"
               >
-                <button type="submit">Delete</button>
+                <button type="submit" class="btn btn-outline fa-solid fa-trash"></button>
               </form>
-            </section>
-          <% }) %>
-        </div>
-      </div>
+            </div>
+                
+            <div class="modal fade" id="editBookModal<%=book._id%>" tabindex="-1">
+              <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h1 class="modal-title fs-5">Change bookshelf for this book</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <form 
+                      action="/books/updateBook/<%=book._id%>?_method=PUT"
+                      method="POST"
+                    >
+                      <input type="hidden" name="newStatus" value="read">
+                      <button type="submit" class="btn btn-outline-dark rounded-pill">Read</button>
+                    </form>
+                    <form 
+                      action="/books/updateBook/<%=book._id%>?_method=PUT"
+                      method="POST"
+                    >
+                      <input type="hidden" name="newStatus" value="reading">
+                      <button type="submit" class="btn btn-outline-dark rounded-pill">Currently reading</button>
+                    </form>
+                    <form 
+                      action="/books/updateBook/<%=book._id%>?_method=PUT"
+                      method="POST"
+                    >
+                      <input type="hidden" name="newStatus" value="wishlist">
+                      <button type="submit" class="btn btn-outline-dark rounded-pill">Want to read</button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        <% }) %>
+      </section>
+
+      <section>
+        <a href="/logout">Logout</a>
+      </section>
     </div>
-    
-    
-  </section>
-  <section>
-    <a href="/logout">Logout</a>
   </section>
 
 <%- include("partials/footer") -%>

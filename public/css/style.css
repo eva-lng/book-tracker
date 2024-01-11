@@ -6,7 +6,7 @@
   padding: 5px;
 }
 
-.no-collapse-form {
+header nav .no-collapse-form {
   width: 40%;
 }
 
@@ -16,4 +16,8 @@
 
 .user-info span, .user-shelves span {
   width:150px;
+}
+
+.my-books .book-thumbnail {
+  width: 80px;
 }
