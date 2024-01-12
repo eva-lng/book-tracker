@@ -1,11 +1,91 @@
 <%- include("partials/header") -%>
-  <section>
-    <form action="/search" method="GET">
-      <input type="text" name="q" placeholder="Search here">
-      <button type="submit">Search</button>
-    </form>
-  </section>
   
+<div class="container px-xl-5">
+  <section class="quotes">
+    <h1 class="text-center">Quotes</h1>
+    <button type="button" class="btn btn-link d-block mx-auto" data-bs-toggle="modal" data-bs-target="#addQuoteModal">
+      Add a quote
+    </button>
+    <!-- add quote modal -->
+    <div class="modal fade" id="addQuoteModal" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5">Add a quote</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form action="/quotes/saveQuote" method="POST">
+              <label for="quoteText">Quote:</label>
+              <textarea name="quoteText" id="quoteText" cols="30" rows="6"></textarea>
+        
+              <label for="bookName">Book Name</label>
+              <input type="text" name="bookName" id="bookName">
+              
+              <button type="submit" class="btn btn-outline">Save</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- <a href="/quotes/addQuote" class="d-block text-center">Add a quote</a> -->
+
+    <section class="quotecards-field">
+      <% for (const book in quotes) { %>
+        <section class="bookquotes">
+          <h2 class="h5"><%= book %></h2>
+          <div class="d-flex flex-wrap justify-content-evenly">
+            <% quotes[book].forEach(quote => { %>
+              <section class="quotecard shadow-sm rounded-3 p-3 mx-lg-1 my-2 my-md-3 d-flex">
+                <!-- quote text -->
+                <blockquote><%= quote.text %></blockquote>
+                <div class="quote-actions">
+                  <!-- edit quote -->
+                  <button type="button" class="btn btn-outline" data-bs-toggle="modal" data-bs-target="#editQuoteModal<%=quote._id%>">
+                    <i class="fa-solid fa-pen"></i>
+                  </button>
+                  <!-- edit quote modal -->
+                  <div class="modal fade" id="editQuoteModal<%=quote._id%>" tabindex="-1">
+                    <div class="modal-dialog modal-dialog-centered">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h1 class="modal-title fs-5">Update quote</h1>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                          <form 
+                            action="/quotes/updateQuote/<%=quote._id%>?_method=PUT" 
+                            method="POST"
+                          >
+                            <label for="quoteTextEdit">Quote:</label>
+                            <textarea name="quoteTextEdit" id="quoteTextEdit" cols="30" rows="6"><%= quote.text %></textarea>
+                            <button type="submit">Update Quote</button>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- delete quote -->
+                  <form 
+                    action="/quotes/deleteQuote/<%=quote._id%>?_method=DELETE"
+                    method="POST"
+                  >
+                    <button type="submit" class="btn btn-outline fa-solid fa-trash"></button>
+                  </form>
+                </div>
+              </section>
+            <% }) %>
+          </div>
+        </section>
+      <% } %>
+    </section>
+  </section>
+
+  <section>
+    <a href="/logout">Logout</a>
+  </section>
+</div>
+
   <section>
     <p><a href="/quotes/addQuote">Add a quote</a></p>
   </section>
@@ -13,16 +93,10 @@
   <section>
     <% for (const book in quotes) { %>
       <div>
-        <h2><%= book %></h2>
+        <h2></h2>
         <% quotes[book].forEach(quote => { %>
           <div>
             <p><%= quote.text %></p>
-            <!-- <form 
-              action="/quotes/updateQuote/<%=quote._id%>?_method=PUT"
-              method="POST"
-            >
-              <button type="submit">Edit</button>
-            </form> -->
             <button><a href="/quotes/getQuote/<%=quote._id%>">Edit</a></button>
             <form 
               action="/quotes/deleteQuote/<%=quote._id%>?_method=DELETE"
@@ -34,10 +108,6 @@
         <% }) %>
       </div>
     <% } %>
-  </section>
-
-  <section>
-    <a href="/logout">Logout</a>
   </section>
 
 <%- include("partials/footer") -%>

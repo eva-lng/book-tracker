@@ -50,8 +50,8 @@ module.exports = {
   updateQuote: async (req, res) => {
     try {
       await Quote.findByIdAndUpdate(req.params.id, {
-        text: req.body.quoteText,
-        bookTitle: req.body.bookName
+        text: req.body.quoteTextEdit,
+        bookTitle: req.body.bookNameEdit
       })
       console.log("Quote has been updated")
       res.redirect("/quotes")
