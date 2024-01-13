@@ -16,13 +16,15 @@
           </div>
           <div class="modal-body">
             <form action="/quotes/saveQuote" method="POST">
-              <label for="quoteText">Quote:</label>
-              <textarea name="quoteText" id="quoteText" cols="30" rows="6"></textarea>
-        
-              <label for="bookName">Book Name</label>
-              <input type="text" name="bookName" id="bookName">
-              
-              <button type="submit" class="btn btn-outline">Save</button>
+              <div class="mb-3">
+                <label for="quoteText" class="form-label">Quote</label>
+                <textarea class="form-control" name="quoteText" id="quoteText" rows="6"></textarea>
+              </div>
+              <div class="mb-3">
+                <label for="bookName">Book title</label>
+                <input type="text" class="form-control" name="bookName" id="bookName">
+              </div>
+              <button type="submit" class="btn btn-outline-dark">Save</button>
             </form>
           </div>
         </div>
@@ -34,12 +36,15 @@
       <% for (const book in quotes) { %>
         <section class="bookquotes">
           <h2 class="h5"><%= book %></h2>
-          <div class="d-flex flex-wrap justify-content-evenly">
+          <div class="d-flex flex-wrap justify-content-evenly align-items-center">
             <% quotes[book].forEach(quote => { %>
-              <section class="quotecard shadow-sm rounded-3 p-3 mx-lg-1 my-2 my-md-3 d-flex">
+              <section class="quotecard shadow-sm rounded-3 ps-3 pe-0 mx-lg-1 my-2 my-md-3 d-flex">
                 <!-- quote text -->
-                <blockquote><%= quote.text %></blockquote>
-                <div class="quote-actions">
+                <div class="quotetext d-flex align-items-center my-2">
+                  <blockquote class="m-0"><%= quote.text %></blockquote>
+                </div>
+                
+                <div class="quote-actions d-flex flex-column justify-content-center">
                   <!-- edit quote -->
                   <button type="button" class="btn btn-outline" data-bs-toggle="modal" data-bs-target="#editQuoteModal<%=quote._id%>">
                     <i class="fa-solid fa-pen"></i>
@@ -57,9 +62,11 @@
                             action="/quotes/updateQuote/<%=quote._id%>?_method=PUT" 
                             method="POST"
                           >
-                            <label for="quoteTextEdit">Quote:</label>
-                            <textarea name="quoteTextEdit" id="quoteTextEdit" cols="30" rows="6"><%= quote.text %></textarea>
-                            <button type="submit">Update Quote</button>
+                            <div class="mb-3">
+                              <label for="quoteTextEdit" class="form-label">Quote</label>
+                              <textarea class="form-control" name="quoteTextEdit" id="quoteTextEdit" rows="6"><%= quote.text %></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-outline-dark">Save</button>
                           </form>
                         </div>
                       </div>

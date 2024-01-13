@@ -47,4 +47,5 @@ header nav .no-collapse-form {
 /*********** QUOTES ***********/
 .quotecard {
   background-color: white;
+  max-width: 350px;
 }
