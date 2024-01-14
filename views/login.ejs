@@ -1,23 +1,37 @@
 <%- include("partials/header") -%>
 
-<% if (locals.messages.errors) { %>
-  <% messages.errors.forEach( el => { %>
-    <div class="alert alert-danger"><%= el.msg %></div>
-  <% }) %>    
-<% } %>
-
-<% if (locals.messages.info) { %>
-  <% messages.info.forEach( el => { %>
-    <div class="alert alert-danger"><%= el.msg %></div>
-  <% }) %>    
-<% } %>
-
-<h3>Log in to your account</h3>
-<form action="/login" method="POST">
-  <input type="email" name="email" placeholder="Email">
-  <input type="password" name="password" placeholder="Password">
-  <input type="submit">
-</form>
-<p>Don't have an account? <a href="/signup">Sign Up</a></p>
+<div class="container">
+  <section class="login">
+    <section class="error-msg">
+      <% if (locals.messages.errors) { %>
+        <% messages.errors.forEach( el => { %>
+          <div class="alert alert-danger"><%= el.msg %></div>
+        <% }) %>    
+      <% } %>
+      
+      <% if (locals.messages.info) { %>
+        <% messages.info.forEach( el => { %>
+          <div class="alert alert-danger"><%= el.msg %></div>
+        <% }) %>    
+      <% } %>
+    </section>
+    
+    <h2 class="text-center">Account login</h2>
+    <section class="login-form">
+      <form action="/login" method="POST">
+        <div class="mb-3">
+          <label for="emailForm" class="form-label">Email address</label>
+          <input type="email" class="form-control" id="emailForm" name="email" placeholder="name@example.com">
+        </div>
+        <div class="mb-3">
+          <label for="passwordForm" class="form-label">Password</label>
+          <input type="password" class="form-control" id="passwordForm" name="password">
+        </div>
+        <button type="submit" class="btn btn-outline-dark">Login</button>
+      </form>
+      <p>Don't have an account? <a href="/signup">Sign Up</a></p>
+    </section>
+  </section>
+</div>
 
 <%- include("partials/footer") -%>

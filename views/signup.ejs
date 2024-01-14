@@ -1,25 +1,48 @@
 <%- include("partials/header") -%>
 
-<% if (locals.messages.errors) { %>
-  <% messages.errors.forEach( el => { %>
-    <div class="alert alert-danger"><%= el.msg %></div>
-  <% }) %>    
-<% } %>
+<div class="container">
+  <section class="signup">
+    <section class="error-msg">
+      <% if (locals.messages.errors) { %>
+        <% messages.errors.forEach( el => { %>
+          <div class="alert alert-danger"><%= el.msg %></div>
+        <% }) %>    
+      <% } %>
+      
+      <% if (locals.messages.info) { %>
+        <% messages.info.forEach( el => { %>
+          <div class="alert alert-danger"><%= el.msg %></div>
+        <% }) %>    
+      <% } %>
+    </section>
 
-<% if (locals.messages.info) { %>
-  <% messages.info.forEach( el => { %>
-    <div class="alert alert-danger"><%= el.msg %></div>
-  <% }) %>    
-<% } %>
-
-<h3>Create your own account</h3>
-<form action="/signup" method="POST">
-  <input type="text" name="userName" placeholder="User Name">
-  <input type="email" name="email" placeholder="Email">
-  <input type="password" name="password" placeholder="Password">
-  <input type="password" name="confirmPassword" placeholder="Confirm Password">
-  <input type="submit">
-</form>
-<p>Have an account already? <a href="/login">Log in now</a></p>
+    <h2 class="text-center">Create your own account</h2>
+    <section class="signup-form">
+      <form action="/signup" method="POST">
+        <div class="mb-3">
+          <label for="userName" class="form-label">User name</label>
+          <input type="text" class="form-control" id="userName" name="userName">
+        </div>
+        <div class="mb-3">
+          <label for="email" class="form-label">Email address</label>
+          <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com">
+        </div>
+        <div class="mb-3">
+          <label for="password" class="form-label">Password</label>
+          <input type="password" class="form-control" id="password" name="password">
+        </div>
+        <div class="mb-3">
+          <label for="confirmPassword" class="form-label">Confirm password</label>
+          <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" aria-describedby="passwordHelpBlock">
+        </div>
+        <div id="passwordHelpBlock" class="form-text">
+          Your password must be at least 8 characters long.
+        </div>
+        <button type="submit" class="btn btn-outline-dark">Submit</button>
+      </form>
+      <p>Have an account already? <a href="/login">Log in now</a></p>
+    </section>
+  </section>
+</div>
 
 <%- include("partials/footer") -%>
