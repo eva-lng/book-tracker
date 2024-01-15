@@ -1,9 +1,9 @@
 <%- include("partials/header") -%>
   
-<div class="container px-xl-5">
+<div class="container py-4 px-xl-5">
   <section class="quotes">
     <h1 class="text-center">Quotes</h1>
-    <button type="button" class="btn btn-link d-block mx-auto" data-bs-toggle="modal" data-bs-target="#addQuoteModal">
+    <button type="button" class="btn btn-link d-block mx-auto mb-4" data-bs-toggle="modal" data-bs-target="#addQuoteModal">
       Add a quote
     </button>
     <!-- add quote modal -->
@@ -30,7 +30,6 @@
         </div>
       </div>
     </div>
-    <!-- <a href="/quotes/addQuote" class="d-block text-center">Add a quote</a> -->
 
     <section class="quotecards-field">
       <% for (const book in quotes) { %>

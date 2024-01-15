@@ -1,10 +1,64 @@
 <%- include("partials/header") -%>
-<section>
-  <form action="/search" method="GET">
-    <input type="text" name="q" placeholder="Search here">
-    <button type="submit">Search</button>
-  </form>
-</section>
+
+<div class="container">
+  <section class="py-5 view-book d-flex justify-content-center">
+    <section class="info-img mx-3 mx-lg-5">
+      <img src="<%= book.imageUrl %>" alt="Book cover picture" class="d-block mb-3">
+      <button type="button" class="btn btn-outline-dark rounded-pill d-block mx-auto" data-bs-toggle="modal" data-bs-target="#editBookModal">
+        <i class="fa-solid fa-pen"></i>
+        <%= book.status === 'reading' ? ' Reading' : book.status === 'read' ? ' Read' : ' To-read' %>
+      </button>
+
+      <!-- edit book status modal -->
+      <div class="modal fade" id="editBookModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5">Change bookshelf for this book</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form 
+                action="/books/updateBook/<%=book._id%>?_method=PUT"
+                method="POST"
+              >
+                <input type="hidden" name="newStatus" value="read">
+                <button type="submit" class="btn btn-outline-dark rounded-pill d-block mx-auto mb-2">Read</button>
+              </form>
+              <form 
+                action="/books/updateBook/<%=book._id%>?_method=PUT"
+                method="POST"
+              >
+                <input type="hidden" name="newStatus" value="reading">
+                <button type="submit" class="btn btn-outline-dark rounded-pill d-block mx-auto mb-2">Currently reading</button>
+              </form>
+              <form 
+                action="/books/updateBook/<%=book._id%>?_method=PUT"
+                method="POST"
+              >
+                <input type="hidden" name="newStatus" value="wishlist">
+                <button type="submit" class="btn btn-outline-dark rounded-pill d-block mx-auto">Want to read</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="info-content mx-3 mx-lg-5">
+      <h1 class="h3"><%= book.title %></h1>
+      <h2 class="h4"><%= book.subtitle %></h2>
+      <h3 class=""><%= book.authors %></h3>
+      <span><%= book.publisher %></span>
+      <span><%= book.pageCount %></span>
+      <p><%= book.description %></p>
+    </section>
+  </section>
+
+  <section>
+    <a href="/logout">Logout</a>
+  </section>
+</div>
 
 <section>
   <img src="<%= book.imageUrl %>" alt="">
