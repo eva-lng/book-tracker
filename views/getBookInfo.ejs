@@ -1,10 +1,85 @@
 <%- include("partials/header") -%>
-<section>
-  <form action="/search" method="GET">
-    <input type="text" name="q" placeholder="Search here">
-    <button type="submit">Search</button>
-  </form>
-</section>
+
+<div class="container">
+  <section class="py-5 view-book d-md-flex justify-content-center">
+    <section class="info-img mx-3 mx-lg-5 my-3 my-md-5">
+      <% if (book.volumeInfo.imageLinks) { %>
+        <img src="<%=book.volumeInfo.imageLinks.thumbnail%>" alt="Book cover picture" class="d-block mx-auto mb-3">
+      <% } %>
+      <% if (savedBooks.some(savedBook => savedBook.apiID === book.id)) { %>
+        <button type="button" class="btn btn-outline-dark rounded-pill d-block mx-auto" data-bs-toggle="modal" data-bs-target="#editBookModal">
+          <i class="fa-solid fa-pen"></i>
+          <% const status = savedBooks.find(savedBook => savedBook.apiID === book.id).status %>
+          <% const savedBookId = savedBooks.find(savedBook => savedBook.apiID === book.id)._id %>
+          <%= status === 'reading' ? ' Reading' : status === 'read' ? ' Read' : ' To-read' %>
+        </button>
+
+        <!-- edit book status modal -->
+        <div class="modal fade" id="editBookModal" tabindex="-1">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5">Change bookshelf for this book</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <form 
+                  action="/books/updateBook/<%=savedBookId%>?_method=PUT"
+                  method="POST"
+                >
+                  <input type="hidden" name="newStatus" value="read">
+                  <button type="submit" class="btn btn-outline-dark rounded-pill d-block mx-auto mb-2">Read</button>
+                </form>
+                <form 
+                  action="/books/updateBook/<%=savedBookId%>?_method=PUT"
+                  method="POST"
+                >
+                  <input type="hidden" name="newStatus" value="reading">
+                  <button type="submit" class="btn btn-outline-dark rounded-pill d-block mx-auto mb-2">Currently reading</button>
+                </form>
+                <form 
+                  action="/books/updateBook/<%=savedBookId%>?_method=PUT"
+                  method="POST"
+                >
+                  <input type="hidden" name="newStatus" value="wishlist">
+                  <button type="submit" class="btn btn-outline-dark rounded-pill d-block mx-auto">Want to read</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% } else { %>
+        <form action="/books/addBook" method="POST">
+          <input type="hidden" name="apiID" value="<%= book.id %>">
+          <input type="hidden" name="title" value="<%= book.volumeInfo.title %>">
+          <input type="hidden" name="subtitle" value="<%= book.volumeInfo.subtitle ? book.volumeInfo.subtitle : '' %>">
+          <input type="hidden" name="authors" value="<%= book.volumeInfo.authors && book.volumeInfo.authors.length > 0 ? book.volumeInfo.authors.join(', ') : '' %>">
+          <input type="hidden" name="description" value="<%= book.volumeInfo.description ? book.volumeInfo.description.split('<b>').join('').split('</b>').join('').split('<p>').join('').split('</p>').join('').split('<br>').join('').split('<i>').join('').split('</i>').join('') : '' %>">
+          <input type="hidden" name="year" value="<%= book.volumeInfo.publishedDate ? book.volumeInfo.publishedDate.slice(0, 4) : '' %>">
+          <input type="hidden" name="pageCount" value="<%= book.volumeInfo.pageCount ? book.volumeInfo.pageCount.toString() : '' %>">
+          <input type="hidden" name="publisher" value="<%= book.volumeInfo.publisher ? book.volumeInfo.publisher : '' %>">
+          <input type="hidden" name="imageUrl" value="<%= book.volumeInfo.imageLinks ? book.volumeInfo.imageLinks.thumbnail : '' %>">
+          <button type="submit" class="btn btn-outline-dark rounded-pill d-block mx-auto">Add</button>
+        </form>
+      <% } %>
+    </section>
+
+    <section class="info-content mx-3 mx-lg-5">
+      <h1 class="h3 text-center"><%= book.volumeInfo.title %></h1>
+      <h2 class="h4 text-center"><%= book.volumeInfo.subtitle ? book.volumeInfo.subtitle : '' %></h2>
+      <h3 class="h4 text-center"><%= book.volumeInfo.authors && book.volumeInfo.authors.length > 0 ? book.volumeInfo.authors.join(', ') : '' %></h3>
+      <div class="book-details d-flex justify-content-center mb-3">
+        <span class="me-2"><%= book.volumeInfo.publisher ? book.volumeInfo.publisher : '' %></span>
+        <span class="ms-2"><%= book.volumeInfo.pageCount ? book.volumeInfo.pageCount.toString() : '' %> pages</span>
+      </div>
+      <p><%= book.volumeInfo.description ? book.volumeInfo.description.split('<b>').join('').split('</b>').join('').split('<p>').join('').split('</p>').join('').split('<br>').join('').split('<i>').join('').split('</i>').join('') : '' %></p>
+    </section>
+  </section>
+
+  <section>
+    <a href="/logout">Logout</a>
+  </section>
+</div>
 
 <section>
   <% if (book.volumeInfo.imageLinks) { %>

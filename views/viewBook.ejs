@@ -1,9 +1,9 @@
 <%- include("partials/header") -%>
 
 <div class="container">
-  <section class="py-5 view-book d-flex justify-content-center">
-    <section class="info-img mx-3 mx-lg-5">
-      <img src="<%= book.imageUrl %>" alt="Book cover picture" class="d-block mb-3">
+  <section class="py-5 view-book d-md-flex justify-content-center">
+    <section class="info-img mx-3 mx-lg-5 my-3 my-md-5">
+      <img src="<%= book.imageUrl %>" alt="Book cover picture" class="d-block mx-auto mb-3">
       <button type="button" class="btn btn-outline-dark rounded-pill d-block mx-auto" data-bs-toggle="modal" data-bs-target="#editBookModal">
         <i class="fa-solid fa-pen"></i>
         <%= book.status === 'reading' ? ' Reading' : book.status === 'read' ? ' Read' : ' To-read' %>
@@ -46,11 +46,13 @@
     </section>
 
     <section class="info-content mx-3 mx-lg-5">
-      <h1 class="h3"><%= book.title %></h1>
-      <h2 class="h4"><%= book.subtitle %></h2>
-      <h3 class=""><%= book.authors %></h3>
-      <span><%= book.publisher %></span>
-      <span><%= book.pageCount %></span>
+      <h1 class="h3 text-center"><%= book.title %></h1>
+      <h2 class="h4 text-center"><%= book.subtitle %></h2>
+      <h3 class="h4 text-center"><%= book.authors %></h3>
+      <div class="book-details d-flex justify-content-center mb-3">
+        <span class="me-2"><%= book.publisher %></span>
+        <span class="ms-2"><%= book.pageCount %> pages</span>
+      </div>
       <p><%= book.description %></p>
     </section>
   </section>

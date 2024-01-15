@@ -60,6 +60,11 @@ header nav .no-collapse-form {
   max-width: 700px;
 }
 
-.info-img > button {
+.info-img > button, .info-img > form > button {
   width: 95%;
+  max-width: 160px;
+}
+
+.view-book .info-content p {
+  text-align: justify;
 }
