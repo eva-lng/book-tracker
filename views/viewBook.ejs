@@ -50,8 +50,9 @@
       <h2 class="h4 text-center"><%= book.subtitle %></h2>
       <h3 class="h4 text-center"><%= book.authors %></h3>
       <div class="book-details d-flex justify-content-center mb-3">
+        <span class="me-2"><%= book.year %></span>
         <span class="me-2"><%= book.publisher %></span>
-        <span class="ms-2"><%= book.pageCount %> pages</span>
+        <span><%= book.pageCount %> pages</span>
       </div>
       <p><%= book.description %></p>
     </section>

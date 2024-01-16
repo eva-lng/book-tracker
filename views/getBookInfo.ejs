@@ -69,8 +69,9 @@
       <h2 class="h4 text-center"><%= book.volumeInfo.subtitle ? book.volumeInfo.subtitle : '' %></h2>
       <h3 class="h4 text-center"><%= book.volumeInfo.authors && book.volumeInfo.authors.length > 0 ? book.volumeInfo.authors.join(', ') : '' %></h3>
       <div class="book-details d-flex justify-content-center mb-3">
+        <span class="me-2"><%= book.volumeInfo.publishedDate ? book.volumeInfo.publishedDate.slice(0, 4) : '' %></span>
         <span class="me-2"><%= book.volumeInfo.publisher ? book.volumeInfo.publisher : '' %></span>
-        <span class="ms-2"><%= book.volumeInfo.pageCount ? book.volumeInfo.pageCount.toString() : '' %> pages</span>
+        <span><%= book.volumeInfo.pageCount ? book.volumeInfo.pageCount.toString() : '' %> pages</span>
       </div>
       <p><%= book.volumeInfo.description ? book.volumeInfo.description.split('<b>').join('').split('</b>').join('').split('<p>').join('').split('</p>').join('').split('<br>').join('').split('<i>').join('').split('</i>').join('') : '' %></p>
     </section>

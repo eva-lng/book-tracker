@@ -74,7 +74,7 @@ module.exports = {
     const input = req.query.q
     try {
       const savedBooks = await Book.find({ user: req.user.id }, "apiID status")
-      const response = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${input}&key=${api_key}`)
+      const response = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${input}&key=${api_key}&maxResults=30`)
       const data = await response.json()
       res.render("results.ejs", {books: data.items, user: req.user, savedBooks})
       console.log("Search term passed")

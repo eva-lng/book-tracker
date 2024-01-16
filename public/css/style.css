@@ -20,7 +20,7 @@ header nav .no-collapse-form {
 }
 
 /*********** MODALS ***********/
-.view-book form button, .my-books .modal-body button {
+.view-book form button, .my-books .modal-body button, .results .modal-body button {
   width: 90%;
   max-width: 350px;
 }
