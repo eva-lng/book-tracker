@@ -52,7 +52,7 @@ header nav .no-collapse-form {
 /*********** QUOTES ***********/
 .quotecard {
   background-color: white;
-  max-width: 350px;
+  max-width: 300px;
 }
 
 /*********** VIEW BOOK ***********/
@@ -67,4 +67,21 @@ header nav .no-collapse-form {
 
 .view-book .info-content p {
   text-align: justify;
+}
+
+/*********** RESULTS ***********/
+.results .book-info > button, .results .book-info > form button {
+  width: 120px;
+}
+
+.results .book-result {
+  max-width: 800px;
+}
+
+hr {
+  max-width: 1000px;
+}
+
+.results img {
+  width: 100px;
 }

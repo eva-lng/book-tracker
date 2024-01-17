@@ -92,28 +92,4 @@
   </section>
 </div>
 
-  <section>
-    <p><a href="/quotes/addQuote">Add a quote</a></p>
-  </section>
-
-  <section>
-    <% for (const book in quotes) { %>
-      <div>
-        <h2></h2>
-        <% quotes[book].forEach(quote => { %>
-          <div>
-            <p><%= quote.text %></p>
-            <button><a href="/quotes/getQuote/<%=quote._id%>">Edit</a></button>
-            <form 
-              action="/quotes/deleteQuote/<%=quote._id%>?_method=DELETE"
-              method="POST"
-            >
-              <button type="submit">Delete</button>
-            </form>
-          </div>
-        <% }) %>
-      </div>
-    <% } %>
-  </section>
-
 <%- include("partials/footer") -%>

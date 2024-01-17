@@ -9,7 +9,7 @@
             <img src="<%=book.volumeInfo.imageLinks.thumbnail%>" alt="Book cover image">
           <% } %>
         </div>
-        <div class="book-info">
+        <div class="book-info ps-4 d-flex flex-column">
           <h2><a href="/search/<%=book.id%>" class="h4"><%= book.volumeInfo.title %></a></h2>
           <% if (book.volumeInfo.subtitle) { %>
             <h4 class="h5"><%= book.subtitle %></h4>
@@ -18,7 +18,7 @@
             <h3 class="h5"><%= book.volumeInfo.authors.join(", ") %></h3>
           <% } %>
           <% if (savedBooks.some(savedBook => savedBook.apiID === book.id)) { %>
-            <button type="button" class="btn btn-outline-dark rounded-pill d-block mx-auto" data-bs-toggle="modal" data-bs-target="#editBookModal<%=book.id%>">
+            <button type="button" class="btn btn-outline-dark rounded-pill mt-auto" data-bs-toggle="modal" data-bs-target="#editBookModal<%=book.id%>">
               <i class="fa-solid fa-pen"></i>
               <% const status = savedBooks.find(savedBook => savedBook.apiID === book.id).status %>
               <% const savedBookId = savedBooks.find(savedBook => savedBook.apiID === book.id)._id %>
@@ -60,7 +60,7 @@
               </div>
             </div>
           <% } else { %>
-            <form action="/books/addBook" method="POST">
+            <form action="/books/addBook" method="POST" class="mt-auto">
               <input type="hidden" name="apiID" value="<%= book.id %>">
               <input type="hidden" name="title" value="<%= book.volumeInfo.title %>">
               <input type="hidden" name="subtitle" value="<%= book.volumeInfo.subtitle ? book.volumeInfo.subtitle : '' %>">
@@ -70,7 +70,7 @@
               <input type="hidden" name="pageCount" value="<%= book.volumeInfo.pageCount ? book.volumeInfo.pageCount.toString() : '' %>">
               <input type="hidden" name="publisher" value="<%= book.volumeInfo.publisher ? book.volumeInfo.publisher : '' %>">
               <input type="hidden" name="imageUrl" value="<%= book.volumeInfo.imageLinks ? book.volumeInfo.imageLinks.thumbnail : '' %>">
-              <button type="submit" class="btn btn-outline-dark rounded-pill d-block mx-auto"><i class="fa-solid fa-circle-plus"></i> Add</button>
+              <button type="submit" class="btn btn-outline-dark rounded-pill"><i class="fa-solid fa-circle-plus"></i> Add</button>
             </form>
           <% } %>
         </div>
@@ -78,40 +78,10 @@
       <hr />
     <% }) %>
   </section>
-</div>
 
-<section>
-  <% books.forEach(book => { %>
-    <div>
-      <h3><a href="/search/<%=book.id%>"><%= book.volumeInfo.title %></a></h3>
-      <% if (book.volumeInfo.subtitle) { %>
-        <h4><%= book.subtitle %></h4>
-      <% } %>
-      <% if (book.volumeInfo.authors) { %>
-        <h3><%= book.volumeInfo.authors.join(", ") %></h3>
-      <% } %>
-      <% if (book.volumeInfo.imageLinks) { %>
-        <img src="<%=book.volumeInfo.imageLinks.thumbnail%>" alt="book cover thumbnail">
-      <% } %>
-      <% if (savedBooks.some(savedBook => savedBook.apiID === book.id)) { %>
-        <button><%= savedBooks.find(savedBook => savedBook.apiID === book.id).status %></button>
-      <% } else { %>
-        <form action="/books/addBook" method="POST">
-          <input type="hidden" name="apiID" value="<%= book.id %>">
-          <input type="hidden" name="title" value="<%= book.volumeInfo.title %>">
-          <input type="hidden" name="subtitle" value="<%= book.volumeInfo.subtitle ? book.volumeInfo.subtitle : '' %>">
-          <input type="hidden" name="authors" value="<%= book.volumeInfo.authors && book.volumeInfo.authors.length > 0 ? book.volumeInfo.authors.join(', ') : '' %>">
-          <input type="hidden" name="description" value="<%= book.volumeInfo.description ? book.volumeInfo.description.split('<b>').join('').split('</b>').join('').split('<p>').join('').split('</p>').join('').split('<br>').join('').split('<i>').join('').split('</i>').join('') : '' %>">
-          <input type="hidden" name="year" value="<%= book.volumeInfo.publishedDate ? book.volumeInfo.publishedDate.slice(0, 4) : '' %>">
-          <input type="hidden" name="pageCount" value="<%= book.volumeInfo.pageCount ? book.volumeInfo.pageCount.toString() : '' %>">
-          <input type="hidden" name="publisher" value="<%= book.volumeInfo.publisher ? book.volumeInfo.publisher : '' %>">
-          <input type="hidden" name="imageUrl" value="<%= book.volumeInfo.imageLinks ? book.volumeInfo.imageLinks.thumbnail : '' %>">
-          <button type="submit">Add</button>
-        </form>
-      <% } %>
-    </div>
-    <hr />
-  <% }) %>
-</section>
+  <section>
+    <a href="/logout">Logout</a>
+  </section>
+</div>
 
 <%- include("partials/footer") -%>
