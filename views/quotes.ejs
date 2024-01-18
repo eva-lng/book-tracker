@@ -1,7 +1,7 @@
 <%- include("partials/header") -%>
   
-<div class="container py-4 px-xl-5">
-  <section class="quotes">
+<section class="quotes">
+  <div class="container py-4 px-xl-5">
     <h1 class="text-center">Quotes</h1>
     <button type="button" class="btn btn-link d-block mx-auto mb-4" data-bs-toggle="modal" data-bs-target="#addQuoteModal">
       Add a quote
@@ -33,7 +33,7 @@
 
     <section class="quotecards-field">
       <% for (const book in quotes) { %>
-        <section class="bookquotes">
+        <section class="bookquotes mb-4">
           <h2 class="h5"><%= book %></h2>
           <div class="d-flex flex-wrap justify-content-evenly align-items-center">
             <% quotes[book].forEach(quote => { %>
@@ -45,7 +45,7 @@
                 </div>
                 
                 <div class="quote-actions d-flex flex-column justify-content-center">
-                  <!-- edit quote -->
+                  <!-- edit quote button -->
                   <button type="button" class="btn btn-outline" data-bs-toggle="modal" data-bs-target="#editQuoteModal<%=quote._id%>">
                     <i class="fa-solid fa-pen"></i>
                   </button>
@@ -86,11 +86,11 @@
         </section>
       <% } %>
     </section>
-  </section>
+  </div>
 
   <section>
     <a href="/logout">Logout</a>
   </section>
-</div>
+</section>
 
 <%- include("partials/footer") -%>

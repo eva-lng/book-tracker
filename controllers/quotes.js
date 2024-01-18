@@ -10,13 +10,6 @@ module.exports = {
       console.log(err)
     }
   },
-  addQuote: async (req, res) => {
-    try {
-      res.render("addQuote.ejs", { user: req.user })
-    } catch(err) {
-      console.log(err)
-    }
-  },
   saveQuote: async (req, res) => {
     try {
       await Quote.create({
@@ -37,14 +30,6 @@ module.exports = {
       res.redirect("/quotes")
     } catch(err) {
         console.log(err)
-    }
-  },
-  getQuote: async (req, res) => {
-    try {
-      const quote = await Quote.findById(req.params.id)
-      res.render("updateQuote.ejs", { user: req.user, quote: quote })
-    } catch(err) {
-      console.log(err)
     }
   },
   updateQuote: async (req, res) => {

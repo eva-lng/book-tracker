@@ -1,7 +1,7 @@
 <%- include("partials/header") -%>
 
-<div class="container py-4 px-xl-5">
-  <section class="my-books">
+<section class="my-books">
+  <div class="container py-4 px-xl-5">
     <h1 class="text-center">My Books</h1>
     <section class="bookshelves-list mb-4">
       <ul class="d-flex justify-content-center list-unstyled">
@@ -26,9 +26,11 @@
           </div>
           <div class="book-actions">
             <a href="/books/viewBook/<%=book._id%>" class="btn btn-outline fa-solid fa-circle-info"></a>
+            <!-- edit book status button -->
             <button type="button" class="btn btn-outline" data-bs-toggle="modal" data-bs-target="#editBookModal<%=book._id%>">
               <i class="fa-solid <%= book.status === 'reading' ? 'fa-book-open' : book.status === 'read' ? 'fa-square-check' : 'fa-heart' %>"></i>
             </button>
+            <!-- delete book -->
             <form 
               action="/books/deleteBook/<%=book._id%>?_method=DELETE"
               method="POST"
@@ -73,12 +75,11 @@
         </section>
       <% }) %>
     </section>
-  </section>
+  </div>
 
   <section>
     <a href="/logout">Logout</a>
   </section>
-</div>
-  
+</section>
 
 <%- include("partials/footer") -%>
