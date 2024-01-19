@@ -1,5 +1,10 @@
 body {
   background-color: #F2EFE7;
+  height: 100vh;
+}
+
+a {
+  color: #4A3416;
 }
 
 /*********** HEADER ***********/
@@ -23,10 +28,21 @@ header nav .no-collapse-form {
   width: 30px;
 }
 
+/*********** FOOTER ***********/
+footer {
+  background-color: #A1A09E;
+}
+
 /*********** MODALS ***********/
 .view-book form button, .my-books .modal-body button, .results .modal-body button {
   width: 90%;
   max-width: 350px;
+}
+
+/*********** LOGIN ***********/
+.login-form, .signup-form {
+  width: 75%;
+  max-width: 600px;
 }
 
 /*********** PROFILE ***********/
@@ -54,6 +70,12 @@ header nav .no-collapse-form {
 }
 
 /*********** QUOTES ***********/
+
+
+.add-quote-btn, .add-quote-btn:hover {
+  color: #4A3416;
+}
+
 .quotecard {
   background-color: white;
   max-width: 300px;
@@ -94,13 +116,4 @@ hr {
 
 .results img {
   width: 100px;
-}
-
-/*********** FOOTER ***********/
-footer {
-  background-color: #A1A09E;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100vw;
 }

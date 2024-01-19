@@ -22,12 +22,13 @@
   <!-- font-awesome -->
   <script src="https://kit.fontawesome.com/5d7bb29ba5.js" crossorigin="anonymous"></script>
   </head>
-  <body>
+  <body class="d-flex flex-column">
     <header class="mb-xl-5 mb-lg-3 shadow-sm">
-      <nav class="navbar navbar-expand-sm">
+      <nav class="navbar navbar-expand-md">
         <div class="container">
           <a href="#" class="navbar-brand">
-            <img src="/imgs/book-stack-bw.png" alt="Stack of books"> bookTracker
+            <img src="/imgs/book-stack-bw.png" alt="Stack of books">
+            <span class="d-md-none d-lg-inline"> bookTracker</span>
           </a>
           <form class="d-none d-md-flex mx-auto no-collapse-form" role="search" action="/search" method="GET">
             <input class="form-control" type="search" name="q" placeholder="Search books..." aria-label="Search">
@@ -43,19 +44,11 @@
               <li class="nav-item"><a href="/quotes" class="nav-link">Quotes</a></li>
               <li class="nav-item"><a href="/logout" class="nav-link">Sign Out</a></li>
             </ul>
-            <form class="d-sm-none d-flex" role="search" action="/search" method="GET">
+            <form class="d-md-none d-flex" role="search" action="/search" method="GET">
               <input class="form-control" type="search" name="q" placeholder="Search books..." aria-label="Search">
               <button class="btn btn-outline-success" type="submit">Search</button>
             </form>
           </div>
         </div>
       </nav>
-      <section class="d-none d-sm-block d-md-none pb-1">
-        <div class="container">
-          <form class="d-flex" role="search" action="/search" method="GET">
-            <input class="form-control" type="search" name="q" placeholder="Search books..." aria-label="Search">
-            <button class="btn btn-outline-success" type="submit">Search</button>
-          </form>
-        </div>
-      </section>
     </header>

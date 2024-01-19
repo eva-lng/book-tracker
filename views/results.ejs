@@ -1,7 +1,8 @@
 <%- include("partials/header") -%>
 
-<section class="results">
+<section class="results mb-5">
   <div class="container">
+    <h1 class="text-center">Results</h1>
     <% books.forEach(book => { %>
       <section class="book-result d-flex">
         <div class="img-cont">
@@ -78,7 +79,6 @@
       <hr />
     <% }) %>
   </div>
-
 </section>
 
 <%- include("partials/footer") -%>
