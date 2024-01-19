@@ -19,6 +19,10 @@ header nav .no-collapse-form {
   width: 40%;
 }
 
+.navbar-brand img {
+  width: 30px;
+}
+
 /*********** MODALS ***********/
 .view-book form button, .my-books .modal-body button, .results .modal-body button {
   width: 90%;
@@ -90,4 +94,13 @@ hr {
 
 .results img {
   width: 100px;
+}
+
+/*********** FOOTER ***********/
+footer {
+  background-color: #A1A09E;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
 }

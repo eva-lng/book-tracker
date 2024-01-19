@@ -1,7 +1,7 @@
 <%- include("partials/header") -%>
 
-<div class="container">
-  <section class="results">
+<section class="results">
+  <div class="container">
     <% books.forEach(book => { %>
       <section class="book-result d-flex">
         <div class="img-cont">
@@ -77,11 +77,8 @@
       </section>
       <hr />
     <% }) %>
-  </section>
+  </div>
 
-  <section>
-    <a href="/logout">Logout</a>
-  </section>
-</div>
+</section>
 
 <%- include("partials/footer") -%>
