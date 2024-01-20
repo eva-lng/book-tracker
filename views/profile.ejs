@@ -18,7 +18,7 @@
           </span>
           <a href="/books/reading" class="d-inline-block me-1 me-md-2">Reading (<%= books.filter(book => book.status === "reading").length %>)</a>
           <a href="/books/read" class="d-inline-block me-1 me-md-2">Read (<%= books.filter(book => book.status === "read").length %>)</a>
-          <a href="/books/wishlist" class="d-inline-block me-1 me-md-2">To read (0)</a>
+          <a href="/books/wishlist" class="d-inline-block me-1 me-md-2">To read (<%= books.filter(book => book.status === "wishlist").length %>)</a>
           <a href="/books" class="d-inline-block me-1 me-md-2">All (<%= books.length %>)</a>
         </div>
       </section>
