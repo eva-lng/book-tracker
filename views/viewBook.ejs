@@ -46,13 +46,21 @@
     </section>
 
     <section class="info-content mx-3 mx-lg-5">
-      <h1 class="h3 text-center"><%= book.title %></h1>
-      <h2 class="h4 text-center"><%= book.subtitle %></h2>
-      <h3 class="h4 text-center"><%= book.authors %></h3>
+      <h1 class="h2 text-center"><%= book.title %></h1>
+      <h2 class="h5 text-center"><%= book.subtitle %></h2>
+      <h3 class="h5 text-center text-secondary"><%= book.authors %></h3>
+      <h5 class="h6 text-center text-secondary mb-3"><%= book.publisher %></h5>
       <div class="book-details d-flex justify-content-center mb-3">
-        <span class="me-2"><%= book.year %></span>
-        <span class="me-2"><%= book.publisher %></span>
-        <span><%= book.pageCount %> pages</span>
+        <div class="me-4 text-center">
+          <h6 class="text-secondary mb-0">Year</h6>
+          <span><%= book.year %></span>
+        </div>
+        <div class="text-center">
+          <h6 class="text-secondary mb-0">Pages</h6>
+          <span><%= book.pageCount %></span>
+        </div>
+        <!-- <span class="me-2"><%= book.year %></span>
+        <span><%= book.pageCount %> pages</span> -->
       </div>
       <p><%= book.description %></p>
     </section>

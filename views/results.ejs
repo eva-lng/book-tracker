@@ -71,9 +71,9 @@
             </div>
             <div class="book-info ps-4 d-flex flex-column">
               <h2 class="h4"><%= book.volumeInfo.title %><a href="/search/<%=book.id%>" class="btn btn-outline fa-solid fa-circle-info"></a></h2>
-              <% if (book.volumeInfo.subtitle) { %>
-                <h4 class="h5"><%= book.subtitle %></h4>
-              <% } %>
+              <!-- <% if (book.volumeInfo.subtitle) { %>
+                <h4 class="h5 subtitle"><%= book.volumeInfo.subtitle %></h4>
+              <% } %> -->
               <% if (book.volumeInfo.authors) { %>
                 <h3 class="h5 text-secondary"><%= book.volumeInfo.authors.join(", ") %></h3>
               <% } %>
@@ -127,8 +127,8 @@
                     <input type="hidden" name="subtitle" value="<%= book.volumeInfo.subtitle ? book.volumeInfo.subtitle : '' %>">
                     <input type="hidden" name="authors" value="<%= book.volumeInfo.authors && book.volumeInfo.authors.length > 0 ? book.volumeInfo.authors.join(', ') : '' %>">
                     <input type="hidden" name="description" value="<%= book.volumeInfo.description ? book.volumeInfo.description.split('<b>').join('').split('</b>').join('').split('<p>').join('').split('</p>').join('').split('<br>').join('').split('<i>').join('').split('</i>').join('') : '' %>">
-                    <input type="hidden" name="year" value="<%= book.volumeInfo.publishedDate ? book.volumeInfo.publishedDate.slice(0, 4) : '' %>">
-                    <input type="hidden" name="pageCount" value="<%= book.volumeInfo.pageCount ? book.volumeInfo.pageCount.toString() : '' %>">
+                    <input type="hidden" name="year" value="<%= book.volumeInfo.publishedDate ? book.volumeInfo.publishedDate.slice(0, 4) : '?' %>">
+                    <input type="hidden" name="pageCount" value="<%= book.volumeInfo.pageCount ? book.volumeInfo.pageCount.toString() : '?' %>">
                     <input type="hidden" name="publisher" value="<%= book.volumeInfo.publisher ? book.volumeInfo.publisher : '' %>">
                     <input type="hidden" name="imageUrl" value="<%= book.volumeInfo.imageLinks ? book.volumeInfo.imageLinks.thumbnail : '' %>">
                     <button type="submit" class="btn btn-outline-dark rounded-pill"><i class="fa-solid fa-circle-plus"></i> Add</button>
