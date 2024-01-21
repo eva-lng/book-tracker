@@ -102,7 +102,7 @@ footer {
 }
 
 /*********** RESULTS ***********/
-.results .book-info > button, .results .book-info > form button {
+.results .book-info > button, .results .book-info > form button, .results .book-info > a {
   width: 120px;
 }
 

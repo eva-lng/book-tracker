@@ -2,8 +2,6 @@ const Book = require("../models/Book");
 require("dotenv").config({path: "./config/.env"})
 const api_key = process.env.API_KEY;
 
-// &langRestrict=en
-
 module.exports = {
   getProfile: async (req, res) => {
     try {
@@ -73,10 +71,15 @@ module.exports = {
   search: async (req, res) => {
     const input = req.query.q
     try {
-      const savedBooks = await Book.find({ user: req.user.id }, "apiID status")
+      let savedBooks = []
+      let user = null
+      if (req.user) {
+        savedBooks = await Book.find({ user: req.user.id }, "apiID status")
+        user = req.user
+      }
       const response = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${input}&key=${api_key}&maxResults=30`)
       const data = await response.json()
-      res.render("results.ejs", {books: data.items, user: req.user, savedBooks})
+      res.render("results.ejs", {books: data.items, user, savedBooks})
       console.log("Search term passed")
     } catch(err) {
       console.log(err)

@@ -39,10 +39,8 @@
           </button>
           <div class="collapse navbar-collapse flex-grow-0" id="navbarNav">
             <ul class="navbar-nav">
-              <li class="nav-item"><a href="/books" class="nav-link">My Books</a></li>
-              <li class="nav-item"><a href="/profile" class="nav-link">Profile</a></li>
-              <li class="nav-item"><a href="/quotes" class="nav-link">Quotes</a></li>
-              <li class="nav-item"><a href="/logout" class="nav-link">Sign Out</a></li>
+              <li class="nav-item"><a href="/login" class="nav-link">Log in</a></li>
+              <li class="nav-item"><a href="/signup" class="nav-link">Register</a></li>
             </ul>
             <form class="d-md-none d-flex" role="search" action="/search" method="GET">
               <input class="form-control" type="search" name="q" placeholder="Search books..." aria-label="Search">
@@ -53,7 +51,7 @@
       </nav>
     </header>
 
-    <div class="container">
+    <div class="container py-4 px-xl-5">
       <section class="signup">
         <section class="error-msg">
           <% if (locals.messages.errors) { %>
@@ -69,7 +67,7 @@
           <% } %>
         </section>
 
-        <h1 class="text-center">Create your own account</h1>
+        <h1 class="text-center mb-4">Create your own account</h1>
         <section class="signup-form mx-auto">
           <form action="/signup" method="POST" class="mb-3">
             <div class="form-floating mb-3">
