@@ -1,10 +1,16 @@
 body {
   background-color: #F2EFE7;
   height: 100vh;
+  font-family: "Poppins", sans-serif;
 }
 
 a {
   color: #4A3416;
+}
+
+/*********** INDEX ***********/
+.homepage i {
+  font-size: 1.9rem;
 }
 
 /*********** HEADER ***********/
@@ -57,7 +63,7 @@ footer {
 /*********** MY BOOKS ***********/
 .bookcard {
   width: 300px;
-  height: 150px;
+  /* height: 150px; */
   background-color: white;
 }
 
@@ -92,7 +98,7 @@ footer {
   max-width: 700px;
 }
 
-.info-img > button, .info-img > form > button {
+.info-img > button, .info-img > form > button, .info-img > a {
   width: 95%;
   max-width: 160px;
 }

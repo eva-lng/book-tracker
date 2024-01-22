@@ -19,6 +19,10 @@
   />
   <!-- css -->
   <link rel="stylesheet" href="/css/style.css">
+  <!-- font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
   <!-- font-awesome -->
   <script src="https://kit.fontawesome.com/5d7bb29ba5.js" crossorigin="anonymous"></script>
   </head>
@@ -26,7 +30,7 @@
     <header class="mb-xl-5 mb-lg-3 shadow-sm">
       <nav class="navbar navbar-expand-md">
         <div class="container">
-          <a href="#" class="navbar-brand">
+          <a href="/" class="navbar-brand">
             <img src="/imgs/book-stack-bw.png" alt="Stack of books">
             <span class="d-md-none d-lg-inline"> bookTracker</span>
           </a>
@@ -39,8 +43,15 @@
           </button>
           <div class="collapse navbar-collapse flex-grow-0" id="navbarNav">
             <ul class="navbar-nav">
-              <li class="nav-item"><a href="/login" class="nav-link">Log in</a></li>
-              <li class="nav-item"><a href="/signup" class="nav-link">Register</a></li>
+              <% if (user) { %>
+                <li class="nav-item"><a href="/books" class="nav-link">My Books</a></li>
+                <li class="nav-item"><a href="/profile" class="nav-link">Profile</a></li>
+                <li class="nav-item"><a href="/quotes" class="nav-link">Quotes</a></li>
+                <li class="nav-item"><a href="/logout" class="nav-link">Sign Out</a></li>
+              <% } else { %>
+                <li class="nav-item"><a href="/login" class="nav-link">Log in</a></li>
+                <li class="nav-item"><a href="/signup" class="nav-link">Register</a></li>
+              <% } %>
             </ul>
             <form class="d-md-none d-flex" role="search" action="/search" method="GET">
               <input class="form-control" type="search" name="q" placeholder="Search books..." aria-label="Search">
@@ -55,8 +66,29 @@
       <div class="container py-4 px-xl-5">
         <h1 class="text-center mb-4">Book Tracker</h1>
         <h3 class="text-center mb-4">Create your own personalized digital book shelf</h3>
-        <a href="/login">Login</a>
-        <a href="/signup">Signup</a>
+        <div class="d-md-flex justify-content-center">
+          <div class="card mx-5 mx-md-2 mx-lg-3 mx-xl-4 mx-xxl-5 my-3">
+            <div class="card-body text-center">
+              <h5 class="card-title">Discover Your Next Read</h5>
+              <i class="fa-solid fa-magnifying-glass my-4"></i>
+              <p class="card-text">Unearth a world of literature at your fingertips. Search through a vast collection of books using our search feature powered by the Google Books API. Your next adventure awaits.</p>
+            </div>
+          </div>
+          <div class="card mx-5 mx-md-2 mx-lg-3 mx-xl-4 mx-xxl-5 my-3">
+            <div class="card-body text-center">
+              <h5 class="card-title">Build Your Personal Library</h5>
+              <i class="fa-solid fa-book my-4"></i>
+              <p class="card-text">Create a digital haven for your favorite reads. Save and organize books based on your reading status to better track your reading habits. Your library, your rules.</p>
+            </div>
+          </div>
+          <div class="card mx-5 mx-md-2 mx-lg-3 mx-xl-4 mx-xxl-5 my-3">
+            <div class="card-body text-center">
+              <h5 class="card-title">Capture Quotes</h5>
+              <i class="fa-solid fa-quote-right my-4"></i>
+              <p class="card-text">Transform memorable phrases into timeless treasures. Save your favorite quotes from beloved books, creating a personal anthology of wisdom.</p>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 

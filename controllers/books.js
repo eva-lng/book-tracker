@@ -88,10 +88,15 @@ module.exports = {
   getBookInfo: async (req, res) => {
     const volumeID = req.params.id;
     try {
-      const savedBooks = await Book.find({ user: req.user.id }, "apiID status")
+      let savedBooks = []
+      let user = null
+      if (req.user) {
+        savedBooks = await Book.find({ user: req.user.id }, "apiID status")
+        user = req.user
+      }
       const response = await fetch(`https://www.googleapis.com/books/v1/volumes/${volumeID}?key=${api_key}`)
       const data = await response.json()
-      res.render("getBookInfo.ejs", {book: data, user: req.user, savedBooks})
+      res.render("getBookInfo.ejs", {book: data, user, savedBooks})
     } catch(err) {
       console.log(err)
     }
