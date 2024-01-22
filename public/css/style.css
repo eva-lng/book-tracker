@@ -13,6 +13,24 @@ a {
   font-size: 1.9rem;
 }
 
+@media screen and (min-width: 768px) {
+  .homepage .card {
+    width: 210px;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .homepage .card {
+    width: 290px;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .homepage .card {
+    width: 350px;
+  }
+}
+
 /*********** HEADER ***********/
 header {
   background-color: #B1A593;
