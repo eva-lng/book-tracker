@@ -71,6 +71,9 @@ module.exports = {
   search: async (req, res) => {
     const input = req.query.q
     try {
+      if (!input) {
+        return res.render("results.ejs", { books: [], user: req.user })
+      }
       let savedBooks = []
       let user = null
       if (req.user) {
@@ -79,7 +82,10 @@ module.exports = {
       }
       const response = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${input}&key=${api_key}&maxResults=30`)
       const data = await response.json()
-      res.render("results.ejs", {books: data.items, user, savedBooks})
+      if (data.totalItems === 0) {
+        return res.render("results.ejs", { books: [], user })
+      }
+      res.render("results.ejs", { books: data.items, user, savedBooks })
       console.log("Search term passed")
     } catch(err) {
       console.log(err)
