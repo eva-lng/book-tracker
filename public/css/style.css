@@ -57,6 +57,10 @@ footer {
   background-color: #A1A09E;
 }
 
+footer .sources {
+  font-size: 0.8rem;
+}
+
 /*********** MODALS ***********/
 .view-book form button, .my-books .modal-body button, .results .modal-body button {
   width: 90%;
