@@ -50,6 +50,7 @@ app.use("/", mainRoutes)
 app.use("/books", bookRoutes)
 app.use("/quotes", quoteRoutes)
 
+const port = process.env.PORT || 4000
 app.listen(process.env.PORT, ()=>{
-    console.log("Server is running, you better catch it!")
+    console.log(`[SUCCESS] Server is running on port ${port}`)
 })
