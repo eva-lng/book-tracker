@@ -1,10 +1,11 @@
 const express = require("express")
 const app = express()
 const mongoose = require("mongoose")
+const cors = require("cors")
 const passport = require("passport") // helps handle authentication
 const session = require("express-session") // handles cookies and storing sessions (have logged in users)
 const MongoStore = require("connect-mongo") // handles cookies and storing sessions (have logged in users)
-const methodOverride = require("method-override");
+const methodOverride = require("method-override")
 const flash = require("express-flash") // flash notificaion of invalid password
 const logger = require("morgan") // logs requests coming through
 const connectDB = require("./config/database")
@@ -27,7 +28,8 @@ app.use(express.static("public")) // public folder
 app.use(express.urlencoded({ extended: true })) // functions as body parser
 app.use(express.json()) // functions as body parser
 app.use(logger("dev")) // to log http requests
-app.use(methodOverride("_method"));
+app.use(methodOverride("_method"))
+app.use(cors())
 
 // Sessions
 app.use(
