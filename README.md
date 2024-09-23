@@ -1,7 +1,7 @@
 # book tracker
 project intro/description
 
-**Tech used:** EJS, Bootstrap, Node.js, Express, MongoDB, passport
+**Tech used:** EJS, Bootstrap, Node.js, Express, MongoDB, Passport
 
 **Link to the project:**
 
@@ -10,7 +10,7 @@ project intro/description
 ### Installation
 1. Clone the repo
 ```
-git clone <repo-url> replace!!
+git clone <repo-url>
 ```
 2. Navigate to the project directory
 ```
