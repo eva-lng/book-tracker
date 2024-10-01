@@ -1,5 +1,8 @@
 # book tracker
-project intro/description
+This app is a book-tracking tool that helps users organize books they’ve read or want to read and keep track of their favorite quotes.
+
+## About
+The Book Tracker app allows users to categorize books into custom "shelves" (e.g., "To Read," "Currently Reading," or "Read") to keep their reading organized. Users can also save favorite quotes from any book to revisit later. With integrated Google Books API functionality, users can search for books directly within the app and easily add them to their collection. The app uses MongoDB for data storage and Passport for secure user authentication.
 
 ### Tech used
 ![Static Badge](https://img.shields.io/badge/EJS-%23B4CA65?style=for-the-badge&logo=ejs&logoColor=white)
@@ -43,9 +46,6 @@ GOOGLE_BOOKS_API_KEY = api_key
 ```
 npm run dev
 ```
-
-## Features
-
 
 ## Optimizations
 Planned future optimizations could include:
