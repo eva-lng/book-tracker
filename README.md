@@ -48,7 +48,12 @@ npm run dev
 ```
 
 ## Optimizations
-Planned future optimizations could include:
-
+Planned future improvements include:
+- **Enhanced Shelf Customization:** Allow users to create and name their own book shelves, beyond the three pre-set options.
+- **Improved Search Filters:** Add filters to refine search results by author or publication date, making it easier for users to find specific types of books
+- **Improved User Authentication:** A "Forgot Password" feature allows users to securely reset their password by sending a reset link to their registered email. Additionally users can sign up or log in with their Gmail account.
+- **Quote Categorization:** Enable users to categorize saved quotes by theme, author, or book, and add a search or filter function to easily locate specific quotes.
+- **Reading Progress Tracker:** Introduce a progress-tracking feature where users can log their reading progress (e.g., pages read, percentage completion) and set reading goals.
+- **User Sharing:** Allow users to share their custom book shelves with other registered users, allowing them to view or customize their reading lists. 
 
 ## Lessons Learned
