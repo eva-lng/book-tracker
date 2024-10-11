@@ -57,3 +57,9 @@ Planned future improvements include:
 - **User Sharing:** Allow users to share their custom book shelves with other registered users, allowing them to view or customize their reading lists. 
 
 ## Lessons Learned
+Bulding the Book Tracker app provided valuable insights into full-stack development, particularly in the areas of user authentication, database management and application architecture. Key takeaways include:
+- **User Authentication:** Secure user login and session handling with Passport
+- **Database Design:** Effective schema design and querying for data management with Mongoose and MongoDB
+- **MVC Architecture:** Organized code with clear separation of concerns
+- **EJS Templating:** Creation of responsive, data-driven pages using server-side rendering
+- **Backend Development:** Improved proficiency in routing, middleware, and handling HTTP requests using Node.js and Express
